@@ -1,401 +1,105 @@
 <script>
-  // vim has insert and normal
-  // vim sudoku can have two modes as well
-  // insert will add the number as the final answer
-  // normal will add pencil marks
-
-  let mode = 'insert'
-  const modeElement = document.querySelector('.mode')
-  modeElement.innerHTML = mode
-
-  function generatePuzzle() {
-    const grid = [...Array(9)].map(() => Array(9).fill(0))
-
-    function backtrack(row, col) {
-      if (row === 9) return true
-      if (col === 9) return backtrack(row + 1, 0)
-      if (grid[row][col] !== 0) return backtrack(row, col + 1)
-
-      const shuffledNumbers = Array.from({ length: 9 }, (_, i) => i + 1).sort(
-        () => Math.random() - 0.5
-      )
-
-      for (const num of shuffledNumbers) {
-        if (isValidPlacement(row, col, num)) {
-          grid[row][col] = num
-          if (backtrack(row, col + 1)) return true
-          grid[row][col] = 0 // Backtrack
-        }
-      }
-      return false // No valid placement found
-    }
-
-    function isValidPlacement(row, col, num) {
-      for (let i = 0; i < 9; i++) {
-        if (
-          grid[row][i] === num ||
-          grid[i][col] === num ||
-          grid[Math.floor(row / 3) * 3 + Math.floor(i / 3)][
-            Math.floor(col / 3) * 3 + (i % 3)
-          ] === num
-        ) {
-          return false
-        }
-      }
-      return true
-    }
-
-    backtrack(0, 0)
-
-    // Create the big squares
-    const bigSquares = []
-    for (let i = 0; i < 9; i += 3) {
-      for (let j = 0; j < 9; j += 3) {
-        const square = []
-        for (let k = 0; k < 3; k++) {
-          for (let l = 0; l < 3; l++) {
-            square.push(grid[i + k][j + l])
-          }
-        }
-        bigSquares.push(square)
-      }
-    }
-
-    return bigSquares
-  }
-
-  function getHistory() {
-    const solvedPuzzle = generatePuzzle()
-    const flatSolved = solvedPuzzle.flat()
-
-    const randomIndexes = new Set()
-    while (randomIndexes.size < 35) {
-      randomIndexes.add(Math.floor(Math.random() * flatSolved.length))
-    }
-    const flatPuzzle = flatSolved.map((value, index) =>
-      randomIndexes.has(index) ? null : value
-    )
-
-    const smalls = document.querySelectorAll('.small')
-    const data = {}
-
-    for (let i = 0; i < smalls.length; ++i) {
-      const small = smalls[i]
-      const column = small.classList[2].split('-')[0]
-      const row = small.classList[2].split('-')[1]
-
-      data[`${column}-${row}`] = {
-        value: flatPuzzle[i],
-        answer: flatSolved[i],
-        preFilled: true ? flatPuzzle[i] === flatSolved[i] : false,
-      }
-    }
-
-    const history = [data]
-
-    return history
-  }
-
-  function populateGrid() {
-    const data = history[history.length - 1]
-    if (!data) {
-      return
-    }
-    for (const [className, info] of Object.entries(data)) {
-      const square = document.querySelector(`.${className}`)
-
-      if (info.value && info.value !== info.answer) {
-        square.classList.add('incorrect')
-      } else {
-        square.classList.remove('incorrect')
-      }
-
-      square.innerHTML = info.value
-    }
-  }
-
-  function resetStyles() {
-    const smalls = document.querySelectorAll('.small')
-    smalls.forEach((small) => {
-      small.classList.remove('selected')
-      small.classList.remove('highlighted')
-      small.classList.remove('highlighted-number')
-    })
-  }
-
-  function getAnswer(selectedSquare) {
-    const data = history[history.length - 1]
-
-    const squareClass = selectedSquare.classList[2]
-    const answer = data[squareClass].answer
-    return answer
-  }
-
-  function highlightGrid(selectedSquare) {
-    resetStyles()
-    const smalls = document.querySelectorAll('.small')
-
-    const selectedColumn = selectedSquare.classList[2].split('-')[0]
-    const selectedRow = selectedSquare.classList[2].split('-')[1]
-
-    const bigNumber = Number(selectedSquare.classList[1].split('-')[1])
-    const smallsInBig = document.querySelectorAll(`.big-${bigNumber} > div`)
-    smallsInBig.forEach((s) => s.classList.add('highlighted'))
-
-    const highlightedNumber = selectedSquare.innerHTML
-
-    smalls.forEach((s) => {
-      if (s.innerHTML === highlightedNumber && highlightedNumber !== '') {
-        s.classList.add('highlighted-number')
-      }
-
-      const column = s.classList[2].split('-')[0]
-      const row = s.classList[2].split('-')[1]
-
-      if (column === selectedColumn) {
-        s.classList.add('highlighted')
-      }
-      if (row === selectedRow) {
-        s.classList.add('highlighted')
-      }
-    })
-
-    selectedSquare.classList.add('selected')
-  }
-
-  function startGame() {
-    const smalls = document.querySelectorAll('.small')
-
-    smalls.forEach((small) => {
-      small.addEventListener('click', (e) => {
-        highlightGrid(e.target)
-
-        const answer = getAnswer(e.target)
-        // console.log(answer)
-      })
-    })
-
-    removeCompletedNumbers()
-    const selectedSquare = document.querySelector('.a-1')
-    highlightGrid(selectedSquare)
-    handleInput()
-  }
-
-  function handleInput() {
-    function processInput(userInput) {
-      const data = history[history.length - 1]
-
-      const selectedSquare = document.querySelector('.selected')
-      const squareClass = selectedSquare.classList[2]
-
-      if (data[squareClass].preFilled) {
-        return
-      }
-
-      const newData = structuredClone(data)
-      newData[squareClass].value = userInput
-      history.push(newData)
-      populateGrid()
-      highlightGrid(selectedSquare)
-
-      removeCompletedNumbers()
-      checkCompletion()
-    }
-
-    const inputs = document.querySelectorAll('.inputs > p')
-    inputs.forEach((input) => {
-      input.addEventListener('click', (e) => {
-        const userInput = Number(e.target.innerHTML)
-        processInput(userInput)
-      })
-    })
-
-    function navigateGrid(key) {
-      const selectedSquare = document.querySelector('.selected')
-      const selectedColumn = selectedSquare.classList[2].split('-')[0]
-      const selectedRow = Number(selectedSquare.classList[2].split('-')[1])
-
-      const columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']
-      let nextColumn = selectedColumn
-      let nextRow = selectedRow
-
-      const shortcutMap = {
-        u: () => {
-          if (history.length > 1) {
-            history.pop()
-            populateGrid()
-          }
-        },
-        j: () => {
-          nextRow = Number(selectedRow) + 1
-        },
-        k: () => {
-          nextRow = Number(selectedRow) - 1
-        },
-        h: () => {
-          nextColumn = columns[columns.indexOf(selectedColumn) - 1]
-        },
-        l: () => {
-          nextColumn = columns[columns.indexOf(selectedColumn) + 1]
-        },
-        G: () => {
-          nextRow = 9
-        },
-        H: () => {
-          nextRow = 1
-        },
-        M: () => {
-          nextRow = 5
-        },
-        L: () => {
-          nextRow = 9
-        },
-        g: () => {
-          gCount++
-          if (gCount < 2) {
-            gTime = new Date().getTime()
-          } else if (gCount === 2) {
-            gCount = 0
-            const currentTime = new Date().getTime()
-            if (currentTime - gTime < 700) {
-              nextColumn = selectedColumn
-              nextRow = 1
-            }
-          }
-        },
-        0: () => {
-          nextColumn = columns[0]
-        },
-        $: () => {
-          nextColumn = columns[columns.length - 1]
-        },
-      }
-
-      if (!shortcutMap[key]) return
-      shortcutMap[key]()
-
-      const nextSquare = document.querySelector(`.${nextColumn}-${nextRow}`)
-      if (nextSquare) highlightGrid(nextSquare)
-    }
-
-    let gCount = 0
-    let gTime
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key >= 1 && e.key <= 9) {
-        const userInput = Number(e.key)
-        processInput(userInput)
-      } else if (e.key == 'Escape') {
-        console.log('here')
-        if (mode == 'normal') mode = 'insert'
-        else if (mode == 'insert') mode = 'normal'
-        modeElement.innerHTML = mode
-      } else if (!e.ctrlKey) {
-        e.preventDefault()
-        navigateGrid(e.key)
-      }
-    })
-  }
-
-  function removeCompletedNumbers() {
-    const inputs = document.querySelectorAll('.inputs > p')
-
-    const data = history[history.length - 1]
-    for (let i = 1; i <= 9; ++i) {
-      let count = 0
-      for (const [className, info] of Object.entries(data)) {
-        if (info.value === i && info.value === info.answer) {
-          count++
-        }
-      }
-      if (count === 9) {
-        inputs.forEach((input) => {
-          if (Number(input.innerHTML) === i) {
-            input.style.visibility = 'hidden'
-          }
-        })
-      }
-    }
-  }
-
-  function checkCompletion() {
-    const data = history[history.length - 1]
-
-    let allEqual = true
-    for (const key in data) {
-      const currentObject = data[key]
-      if (currentObject.value !== currentObject.answer) {
-        allEqual = false
-        break
-      }
-    }
-
-    if (allEqual) {
-      celebrateCompletion()
-    }
-  }
-
-  function celebrateCompletion() {
-    const container = document.querySelector('.container')
-
-    const height = container.offsetHeight
-    const width = container.offsetWidth
-
-    const formattedTime = stopTimer()
-    const celebrationTime = getCelebrationTime(formattedTime)
-
-    const celebrationContent = document.querySelector('.celebration')
-    const timeElem = document.getElementById('celebration-time')
-    timeElem.innerHTML = celebrationTime
-
-    const undoButton = document.querySelector('.undo')
-    undoButton.style.visibility = 'hidden'
-
-    container.innerHTML = celebrationContent.innerHTML
-    container.style.height = `${height}px`
-    container.style.width = `${width}px`
-    container.classList.add('completed')
-  }
-
-  function getCelebrationTime(timeString) {
-    const [minutes, seconds] = timeString.split(':').map(Number)
-
-    if (minutes > 0) {
-      return `${minutes} minute${minutes > 1 ? 's' : ''}, ${seconds} second${
-        seconds > 1 ? 's' : ''
-      }`
-    } else {
-      return `${seconds} second${seconds > 1 ? 's' : ''}`
-    }
-  }
-
-  function startTimer() {
-    const timerP = document.querySelector('.timer > p')
-    let startTime = Date.now()
-    let elapsedTime = 0
-    let intervalId
-    let formattedTime
-
-    function updateTimerDisplay() {
-      elapsedTime = Date.now() - startTime
-      let minutes = Math.floor(elapsedTime / 1000 / 60)
-      let seconds = Math.floor(elapsedTime / 1000) % 60
-      formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds
-        .toString()
-        .padStart(2, '0')}`
-      timerP.textContent = formattedTime
-    }
-
-    intervalId = setInterval(updateTimerDisplay, 1000)
-
-    return function stopTimer() {
-      clearInterval(intervalId)
-      return formattedTime
-    }
-  }
-
-  const history = getHistory()
-  populateGrid()
-  const stopTimer = startTimer()
-  startGame()
+  //
 </script>
+
+<div class="container">
+  <div class="big big-1">
+    <div class="small big-1-small-1 a-1"></div>
+    <div class="small big-1-small-2 b-1"></div>
+    <div class="small big-1-small-3 c-1"></div>
+    <div class="small big-1-small-4 a-2"></div>
+    <div class="small big-1-small-5 b-2"></div>
+    <div class="small big-1-small-6 c-2"></div>
+    <div class="small big-1-small-7 a-3"></div>
+    <div class="small big-1-small-8 b-3"></div>
+    <div class="small big-1-small-9 c-3"></div>
+  </div>
+  <div class="big big-2">
+    <div class="small big-2-small-1 d-1"></div>
+    <div class="small big-2-small-2 e-1"></div>
+    <div class="small big-2-small-3 f-1"></div>
+    <div class="small big-2-small-4 d-2"></div>
+    <div class="small big-2-small-5 e-2"></div>
+    <div class="small big-2-small-6 f-2"></div>
+    <div class="small big-2-small-7 d-3"></div>
+    <div class="small big-2-small-8 e-3"></div>
+    <div class="small big-2-small-9 f-3"></div>
+  </div>
+  <div class="big big-3">
+    <div class="small big-3-small-1 g-1"></div>
+    <div class="small big-3-small-2 h-1"></div>
+    <div class="small big-3-small-3 i-1"></div>
+    <div class="small big-3-small-4 g-2"></div>
+    <div class="small big-3-small-5 h-2"></div>
+    <div class="small big-3-small-6 i-2"></div>
+    <div class="small big-3-small-7 g-3"></div>
+    <div class="small big-3-small-8 h-3"></div>
+    <div class="small big-3-small-9 i-3"></div>
+  </div>
+  <div class="big big-4">
+    <div class="small big-4-small-1 a-4"></div>
+    <div class="small big-4-small-2 b-4"></div>
+    <div class="small big-4-small-3 c-4"></div>
+    <div class="small big-4-small-4 a-5"></div>
+    <div class="small big-4-small-5 b-5"></div>
+    <div class="small big-4-small-6 c-5"></div>
+    <div class="small big-4-small-7 a-6"></div>
+    <div class="small big-4-small-8 b-6"></div>
+    <div class="small big-4-small-9 c-6"></div>
+  </div>
+  <div class="big big-5">
+    <div class="small big-5-small-1 d-4"></div>
+    <div class="small big-5-small-2 e-4"></div>
+    <div class="small big-5-small-3 f-4"></div>
+    <div class="small big-5-small-4 d-5"></div>
+    <div class="small big-5-small-5 e-5"></div>
+    <div class="small big-5-small-6 f-5"></div>
+    <div class="small big-5-small-7 d-6"></div>
+    <div class="small big-5-small-8 e-6"></div>
+    <div class="small big-5-small-9 f-6"></div>
+  </div>
+  <div class="big big-6">
+    <div class="small big-6-small-1 g-4"></div>
+    <div class="small big-6-small-2 h-4"></div>
+    <div class="small big-6-small-3 i-4"></div>
+    <div class="small big-6-small-4 g-5"></div>
+    <div class="small big-6-small-5 h-5"></div>
+    <div class="small big-6-small-6 i-5"></div>
+    <div class="small big-6-small-7 g-6"></div>
+    <div class="small big-6-small-8 h-6"></div>
+    <div class="small big-6-small-9 i-6"></div>
+  </div>
+  <div class="big big-7">
+    <div class="small big-7-small-1 a-7"></div>
+    <div class="small big-7-small-2 b-7"></div>
+    <div class="small big-7-small-3 c-7"></div>
+    <div class="small big-7-small-4 a-8"></div>
+    <div class="small big-7-small-5 b-8"></div>
+    <div class="small big-7-small-6 c-8"></div>
+    <div class="small big-7-small-7 a-9"></div>
+    <div class="small big-7-small-8 b-9"></div>
+    <div class="small big-7-small-9 c-9"></div>
+  </div>
+  <div class="big big-8">
+    <div class="small big-8-small-1 d-7"></div>
+    <div class="small big-8-small-2 e-7"></div>
+    <div class="small big-8-small-3 f-7"></div>
+    <div class="small big-8-small-4 d-8"></div>
+    <div class="small big-8-small-5 e-8"></div>
+    <div class="small big-8-small-6 f-8"></div>
+    <div class="small big-8-small-7 d-9"></div>
+    <div class="small big-8-small-8 e-9"></div>
+    <div class="small big-8-small-9 f-9"></div>
+  </div>
+  <div class="big big-9">
+    <div class="small big-9-small-1 g-7"></div>
+    <div class="small big-9-small-2 h-7"></div>
+    <div class="small big-9-small-3 i-7"></div>
+    <div class="small big-9-small-4 g-8"></div>
+    <div class="small big-9-small-5 h-8"></div>
+    <div class="small big-9-small-6 i-8"></div>
+    <div class="small big-9-small-7 g-9"></div>
+    <div class="small big-9-small-8 h-9"></div>
+    <div class="small big-9-small-9 i-9"></div>
+  </div>
+</div>
