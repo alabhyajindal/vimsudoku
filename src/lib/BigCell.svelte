@@ -3,8 +3,6 @@
 
   export let pencilMode: boolean
   export let big
-
-  console.log(big)
 </script>
 
 <div>

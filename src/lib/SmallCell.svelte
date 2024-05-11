@@ -4,6 +4,8 @@
   export let pencilMode: boolean
   export let small
 
+  console.log(small)
+
   let marks = [
     {
       value: 1,
@@ -63,7 +65,7 @@
 </script>
 
 <div on:keydown={handleKeyDown} tabindex="1" class="small">
-  <div class={answer ? 'answer' : 'answer hidden'}>{answer || ''}</div>
+  <div class="answer">{small}</div>
   <div class={answer ? 'pencil-marks hidden' : 'pencil-marks'}>
     {#each marks as mark}
       <div class={mark.selected ? 'pencil-mark' : 'pencil-mark hidden'}>
