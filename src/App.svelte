@@ -1,5 +1,6 @@
 <script lang="ts">
   let answer: number | null
+  let pencilMode = true
   let marks = [
     {
       value: 1,
@@ -39,13 +40,22 @@
     },
   ]
 
-  function addMarks(e: KeyboardEvent) {
-    if (e.ctrlKey || e.shiftKey || e.metaKey) return
+  function handleKeyDown(e: KeyboardEvent) {
+    if ((e.ctrlKey && e.key == '[') || e.key == 'Escape') {
+      pencilMode = !pencilMode
+      return
+    } else if (e.ctrlKey) {
+      return
+    }
     e.preventDefault()
 
     const number = Number(e.key)
-    if (marks[number - 1].selected == true) {
+    if (!number) return
+
+    if (!pencilMode) {
       answer = number
+    } else if (marks[number - 1].selected) {
+      marks[number - 1].selected = false
     } else if (number) {
       marks[number - 1].selected = true
       answer = null
@@ -53,6 +63,7 @@
   }
 </script>
 
+<p>{pencilMode ? 'pencil' : 'solve'}</p>
 <div class="small">
   <div class={answer ? 'answer' : 'answer hidden'}>{answer || ''}</div>
   <div class={answer ? 'pencil-marks hidden' : 'pencil-marks'}>
@@ -64,7 +75,7 @@
   </div>
 </div>
 
-<svelte:window on:keydown={addMarks} />
+<svelte:window on:keydown={handleKeyDown} />
 
 <style>
   .small {
