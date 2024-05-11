@@ -12,13 +12,25 @@
   }
 </script>
 
-<p>{pencilMode ? 'pencil' : 'solve'}</p>
 <main>
+  <p>{pencilMode ? 'pencil' : 'solve'}</p>
   <Grid {pencilMode} />
 </main>
 <svelte:window on:keydown={handleKeyDown} />
 
 <style>
+  :global(*) {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  :global(body) {
+    font-family: sans-serif;
+    background-color: var(--background-blue);
+    padding: 12px;
+  }
+
   :global(:root) {
     --background-blue: #d6ebfd;
     --light-blue: #bbdefb;
@@ -33,5 +45,6 @@
 
   main {
     max-width: 500px;
+    margin-inline: auto;
   }
 </style>
