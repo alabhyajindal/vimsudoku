@@ -24,6 +24,18 @@
         $activeSmallCell = 9
       }
       $activeSmallCell -= 3
+    } else if (e.key == 'l') {
+      if ($activeBigCell == 2 && $activeSmallCell == 2) return
+      $data[$activeBigCell][$activeSmallCell].active = false
+
+      if (
+        $activeSmallCell == 2 ||
+        $activeSmallCell == 5 ||
+        $activeSmallCell == 8
+      ) {
+        $activeBigCell++
+        $activeSmallCell = 0
+      } else $activeSmallCell++
     }
   }
 
