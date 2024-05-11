@@ -3,69 +3,12 @@
 
   export let pencilMode: boolean
   export let small
-
-  let marks = [
-    {
-      value: 1,
-      selected: false,
-    },
-    {
-      value: 2,
-      selected: false,
-    },
-    {
-      value: 3,
-      selected: false,
-    },
-    {
-      value: 4,
-      selected: false,
-    },
-    {
-      value: 5,
-      selected: false,
-    },
-    {
-      value: 6,
-      selected: false,
-    },
-    {
-      value: 7,
-      selected: false,
-    },
-    {
-      value: 8,
-      selected: false,
-    },
-    {
-      value: 9,
-      selected: false,
-    },
-  ]
-
-  function handleKeyDown(e: KeyboardEvent) {
-    e.preventDefault()
-
-    const number = Number(e.key)
-    if (!number) return
-
-    if (!pencilMode) {
-      console.log(answer)
-      answer = number
-    } else if (marks[number - 1].selected) {
-      marks[number - 1].selected = false
-      answer = null
-    } else if (number) {
-      marks[number - 1].selected = true
-      answer = null
-    }
-  }
 </script>
 
-<div on:keydown={handleKeyDown} tabindex="1" class="small">
-  <div class="answer">{small.answer}</div>
+<div class="small">
+  <div class="answer">{small.value}</div>
   <div class={answer ? 'pencil-marks hidden' : 'pencil-marks'}>
-    {#each marks as mark}
+    {#each small.pencilMarks as mark}
       <div class={mark.selected ? 'pencil-mark' : 'pencil-mark hidden'}>
         {mark.value}
       </div>
