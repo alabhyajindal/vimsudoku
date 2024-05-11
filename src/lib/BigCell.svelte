@@ -1,11 +1,15 @@
 <script lang="ts">
   import SmallCell from './SmallCell.svelte'
+
   export let pencilMode: boolean
+  export let big
+
+  console.log(big)
 </script>
 
 <div>
-  {#each { length: 9 } as _, i}
-    <SmallCell {pencilMode} />
+  {#each big as small, i}
+    <SmallCell {pencilMode} {small} />
   {/each}
 </div>
 

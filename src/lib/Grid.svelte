@@ -1,11 +1,13 @@
 <script lang="ts">
   import BigCell from './BigCell.svelte'
+  import { puzzle } from './store'
+
   export let pencilMode: boolean
 </script>
 
 <div>
-  {#each { length: 9 } as _, i}
-    <BigCell {pencilMode} />
+  {#each $puzzle as big, i}
+    <BigCell {pencilMode} {big} />
   {/each}
 </div>
 

@@ -1,7 +1,9 @@
 <script lang="ts">
   let answer: number | null
-  // let pencilMode = true
+
   export let pencilMode: boolean
+  export let small
+
   let marks = [
     {
       value: 1,
