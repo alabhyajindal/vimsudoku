@@ -48,6 +48,7 @@
     if (!number) return
 
     if (!pencilMode) {
+      console.log(answer)
       answer = number
     } else if (marks[number - 1].selected) {
       marks[number - 1].selected = false
@@ -74,13 +75,12 @@
   .small {
     border: 0.5px solid var(--dark-blue);
     aspect-ratio: 1;
-    position: relative;
     font-weight: 350;
     color: var(--dark-blue);
     user-select: none;
     min-height: 100%;
+    position: relative;
   }
-
   .answer {
     position: absolute;
     width: 100%;
@@ -89,7 +89,7 @@
     justify-content: center;
     align-items: center;
     font-size: 2em;
-    z-index: -1;
+    z-index: 1;
   }
   .pencil-marks {
     height: 100%;

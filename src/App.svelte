@@ -1,6 +1,6 @@
 <script lang="ts">
   import Grid from './lib/Grid.svelte'
-  let pencilMode = true
+  let pencilMode = false
 
   function handleKeyDown(e: KeyboardEvent) {
     if ((e.ctrlKey && e.key == '[') || e.key == 'Escape') {
