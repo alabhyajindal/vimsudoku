@@ -4,7 +4,7 @@
 </script>
 
 <main>
-  <p>{pencilMode ? 'pencil' : 'solve'}</p>
+  <!-- <p>{pencilMode ? 'pencil' : 'solve'}</p> -->
   <Grid {pencilMode} />
 </main>
 

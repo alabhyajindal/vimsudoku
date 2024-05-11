@@ -1,6 +1,6 @@
 <script lang="ts">
   import BigCell from './BigCell.svelte'
-  import { data } from './store'
+  import { activeBigCell, activeSmallCell, data } from './store'
 
   export let pencilMode: boolean
 
@@ -8,10 +8,17 @@
     if (e.key == 'Escape') {
       e.preventDefault()
       pencilMode = !pencilMode
+    } else if (e.key == 'j') {
+      if ($activeBigCell == 6 && $activeSmallCell >= 6) return
+      $data[$activeBigCell][$activeSmallCell].active = false
+      if ($activeSmallCell >= 6) {
+        $activeBigCell += 3
+        $activeSmallCell = 0
+      } else $activeSmallCell += 3
     }
   }
 
-  console.log(($data[0][0].active = true))
+  $: $data[$activeBigCell][$activeSmallCell].active = true
 </script>
 
 <div>
