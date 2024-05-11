@@ -36,6 +36,13 @@
         $activeBigCell++
         $activeSmallCell = 0
       } else $activeSmallCell++
+    } else if (e.key == 'h') {
+      if ($activeBigCell == 0 && $activeSmallCell == 0) return
+      $data[$activeBigCell][$activeSmallCell].active = false
+      if ($activeSmallCell == 0) {
+        $activeBigCell--
+        $activeSmallCell = 2
+      } else $activeSmallCell--
     }
   }
 
