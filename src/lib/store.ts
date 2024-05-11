@@ -1,4 +1,4 @@
 import { writable } from 'svelte/store'
-import { generatePuzzle } from './puzzleGenerator'
+import { generateData } from './puzzleGenerator'
 
-export const puzzle = writable(generatePuzzle())
+export const data = writable(generateData())

@@ -1,4 +1,4 @@
-export function generatePuzzle() {
+function generatePuzzle() {
   const grid = [...Array(9)].map(() => Array(9).fill(0))
 
   function backtrack(row: number, col: number) {
@@ -51,6 +51,17 @@ export function generatePuzzle() {
     }
   }
 
-  console.log(bigSquares)
   return bigSquares
+}
+
+export function generateData() {
+  const puzzle = generatePuzzle()
+
+  let data = puzzle.map((p) => {
+    return p.map((answer) => {
+      return { answer, pencilMarks: [] }
+    })
+  })
+
+  return data
 }

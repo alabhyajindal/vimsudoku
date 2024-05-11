@@ -63,7 +63,7 @@
 </script>
 
 <div on:keydown={handleKeyDown} tabindex="1" class="small">
-  <div class="answer">{small}</div>
+  <div class="answer">{small.answer}</div>
   <div class={answer ? 'pencil-marks hidden' : 'pencil-marks'}>
     {#each marks as mark}
       <div class={mark.selected ? 'pencil-mark' : 'pencil-mark hidden'}>
