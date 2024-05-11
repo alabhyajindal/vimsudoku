@@ -96,6 +96,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     font-size: 0.8em;
+    font-weight: 600;
   }
   .pencil-mark {
     text-align: center;
