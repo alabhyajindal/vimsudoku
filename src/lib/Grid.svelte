@@ -15,6 +15,15 @@
         $activeBigCell += 3
         $activeSmallCell = 0
       } else $activeSmallCell += 3
+    } else if (e.key == 'k') {
+      if ($activeBigCell == 0 && $activeSmallCell == 0) return
+      $data[$activeBigCell][$activeSmallCell].active = false
+
+      if ($activeSmallCell == 0) {
+        $activeBigCell -= 3
+        $activeSmallCell = 9
+      }
+      $activeSmallCell -= 3
     }
   }
 
