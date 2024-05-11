@@ -4,8 +4,6 @@
   export let pencilMode: boolean
   export let small
 
-  console.log(small)
-
   let marks = [
     {
       value: 1,
