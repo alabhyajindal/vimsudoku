@@ -1,5 +1,5 @@
 <script lang="ts">
-  let answer: number
+  let answer: number | null
   let marks = [
     {
       value: 1,
@@ -46,19 +46,18 @@
     const number = Number(e.key)
     if (marks[number - 1].selected == true) {
       answer = number
-      return
+    } else if (number) {
+      marks[number - 1].selected = true
+      answer = null
     }
-    if (number) marks[number - 1].selected = true
   }
 </script>
 
 <div class="small">
-  <div class="answer">{answer || ''}</div>
-  <div class="pencil-marks">
+  <div class={answer ? 'answer' : 'answer hidden'}>{answer || ''}</div>
+  <div class={answer ? 'pencil-marks hidden' : 'pencil-marks'}>
     {#each marks as mark}
-      <div
-        class={mark.selected ? 'pencil-mark' : 'pencil-mark pencil-mark-hidden'}
-      >
+      <div class={mark.selected ? 'pencil-mark' : 'pencil-mark hidden'}>
         {mark.value}
       </div>
     {/each}
@@ -72,6 +71,18 @@
     border: 1px solid black;
     width: 100px;
     height: 100px;
+    position: relative;
+  }
+  .answer {
+    background-color: pink;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    z-index: -1;
   }
   .pencil-marks {
     height: 100%;
@@ -80,12 +91,12 @@
   }
   .pencil-mark {
     text-align: center;
-    background-color: lightgray;
+    background-color: lightblue;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .pencil-mark-hidden {
+  .hidden {
     visibility: hidden;
   }
 </style>
