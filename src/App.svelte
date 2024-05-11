@@ -1,22 +1,12 @@
 <script lang="ts">
   import Grid from './lib/Grid.svelte'
   let pencilMode = false
-
-  function handleKeyDown(e: KeyboardEvent) {
-    if ((e.ctrlKey && e.key == '[') || e.key == 'Escape') {
-      pencilMode = !pencilMode
-      return
-    } else if (e.ctrlKey) {
-      return
-    }
-  }
 </script>
 
 <main>
   <p>{pencilMode ? 'pencil' : 'solve'}</p>
   <Grid {pencilMode} />
 </main>
-<svelte:window on:keydown={handleKeyDown} />
 
 <style>
   :global(*) {
@@ -26,7 +16,6 @@
   }
 
   :global(body) {
-    font-family: sans-serif;
     background-color: var(--background-blue);
     padding: 12px;
   }

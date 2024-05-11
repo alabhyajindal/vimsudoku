@@ -61,7 +61,7 @@ export function generateData() {
   let data = puzzle.map((p) => {
     return p.map((answer) => {
       const value = Math.random() > 0.45 ? answer : ''
-      return { answer, pencilMarks: [], value }
+      return { answer, pencilMarks: [], value, active: false }
     })
   })
 

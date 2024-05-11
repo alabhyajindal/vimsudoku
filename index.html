@@ -8,17 +8,16 @@
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 
     <title>Vim Sudoku</title>
-    <!-- <link rel="stylesheet" href="src/app.css" /> -->
     <style>
-      * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
+      :root {
+        font-family: Inter, sans-serif;
+        font-feature-settings: 'liga' 1, 'calt' 1;
       }
-      body {
-        font-family: sans-serif;
-        background-color: var(--background-blue);
-        padding-inline: 12px;
+
+      @supports (font-variation-settings: normal) {
+        :root {
+          font-family: InterVariable, sans-serif;
+        }
       }
     </style>
   </head>

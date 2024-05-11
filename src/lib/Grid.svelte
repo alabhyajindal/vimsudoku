@@ -3,6 +3,15 @@
   import { data } from './store'
 
   export let pencilMode: boolean
+
+  function handleKeyDown(e: KeyboardEvent) {
+    if (e.key == 'Escape') {
+      e.preventDefault()
+      pencilMode = !pencilMode
+    }
+  }
+
+  console.log(($data[0][0].active = true))
 </script>
 
 <div>
@@ -10,6 +19,8 @@
     <BigCell {pencilMode} {big} />
   {/each}
 </div>
+
+<svelte:window on:keydown={handleKeyDown} />
 
 <style>
   div {

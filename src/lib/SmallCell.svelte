@@ -5,7 +5,7 @@
   export let small
 </script>
 
-<div class="small">
+<div class={small.active ? 'small small-active' : 'small'}>
   <div class="answer">{small.value}</div>
   <div class={answer ? 'pencil-marks hidden' : 'pencil-marks'}>
     {#each small.pencilMarks as mark}
@@ -25,6 +25,9 @@
     user-select: none;
     min-height: 100%;
     position: relative;
+  }
+  .small-active {
+    background-color: var(--light-blue);
   }
   .answer {
     position: absolute;
