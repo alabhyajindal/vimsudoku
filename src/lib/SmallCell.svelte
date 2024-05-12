@@ -1,6 +1,5 @@
 <script lang="ts">
   export let small
-  $: console.log(small.pencilMarks)
 </script>
 
 <div class={small.active ? 'small small-active' : 'small'}>
@@ -24,9 +23,11 @@
     min-height: 100%;
     position: relative;
   }
+
   .small-active {
     background-color: var(--light-blue);
   }
+
   .answer {
     position: absolute;
     width: 100%;
@@ -37,6 +38,7 @@
     font-size: 2em;
     z-index: 1;
   }
+
   .pencil-marks {
     height: 100%;
     display: grid;
@@ -45,12 +47,14 @@
     z-index: 2;
     font-weight: 600;
   }
+
   .pencil-mark {
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
   }
+
   .hidden {
     visibility: hidden;
   }

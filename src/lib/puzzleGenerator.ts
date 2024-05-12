@@ -68,18 +68,6 @@ interface Small {
   prefilled: boolean
 }
 
-const pencilMarks = [
-  { value: 1, selected: false },
-  { value: 2, selected: false },
-  { value: 3, selected: false },
-  { value: 4, selected: false },
-  { value: 5, selected: false },
-  { value: 6, selected: false },
-  { value: 7, selected: false },
-  { value: 8, selected: false },
-  { value: 9, selected: false },
-]
-
 export function generateData() {
   const puzzle = generatePuzzle()
 
@@ -87,6 +75,10 @@ export function generateData() {
     return p.map((answer, index) => {
       const prefilled = Math.random() > 0.45
       const value = prefilled ? answer : ''
+      const pencilMarks = Array.from({ length: 9 }).map((_, i) => ({
+        value: i + 1,
+        selected: false,
+      }))
 
       const small: Small = {
         answer,
