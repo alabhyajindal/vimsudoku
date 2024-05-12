@@ -2,19 +2,25 @@
   import BigCell from './BigCell.svelte'
   import { activeBigCell, activeSmallCell, data, pencilMode } from './store'
 
-  function handleKeyDown(e: KeyboardEvent) {
-    if (e.key == 'Escape' || (e.ctrlKey && e.key == '[')) {
-      $pencilMode = !$pencilMode
-    } else if (e.key == 'j') {
+  let currentCell: any
+
+  $: {
+    currentCell = $data[$activeBigCell][$activeSmallCell]
+    if (currentCell) currentCell.active = true
+  }
+
+  function navigate(e: KeyboardEvent) {
+    if (e.key == 'j') {
       if ($activeBigCell >= 6 && $activeSmallCell >= 6) return
-      $data[$activeBigCell][$activeSmallCell].active = false
+      currentCell.active = false
+
       if ($activeSmallCell >= 6) {
         $activeBigCell += 3
         $activeSmallCell -= 6
       } else $activeSmallCell += 3
     } else if (e.key == 'k') {
       if ($activeBigCell == 0 && $activeSmallCell <= 2) return
-      $data[$activeBigCell][$activeSmallCell].active = false
+      currentCell.active = false
 
       if ($activeSmallCell <= 2) {
         $activeBigCell -= 3
@@ -28,7 +34,7 @@
           $activeSmallCell == 8)
       )
         return
-      $data[$activeBigCell][$activeSmallCell].active = false
+      currentCell.active = false
 
       if (
         $activeSmallCell == 2 ||
@@ -46,7 +52,7 @@
           $activeSmallCell == 6)
       )
         return
-      $data[$activeBigCell][$activeSmallCell].active = false
+      currentCell.active = false
 
       if (
         $activeSmallCell == 0 ||
@@ -59,7 +65,17 @@
     }
   }
 
-  $: $data[$activeBigCell][$activeSmallCell].active = true
+  function handleKeyDown(e: KeyboardEvent) {
+    if (e.key == 'Escape' || (e.ctrlKey && e.key == '[')) {
+      $pencilMode = !$pencilMode
+    } else if (Number(e.key)) {
+      if (!currentCell.prefilled) {
+        currentCell.value = Number(e.key)
+      }
+    } else {
+      navigate(e)
+    }
+  }
 </script>
 
 <div>
