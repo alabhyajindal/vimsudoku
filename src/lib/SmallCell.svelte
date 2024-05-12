@@ -1,16 +1,14 @@
 <script lang="ts">
-  let answer: number | null
-
-  export let pencilMode: boolean
   export let small
+  $: console.log(small.pencilMarks)
 </script>
 
 <div class={small.active ? 'small small-active' : 'small'}>
   <div class="answer">{small.value}</div>
   <div class="pencil-marks">
     {#each small.pencilMarks as mark}
-      <div class="pencil-mark">
-        {mark}
+      <div class={mark.selected ? 'pencil-mark' : 'pencil-mark hidden'}>
+        {mark.value}
       </div>
     {/each}
   </div>

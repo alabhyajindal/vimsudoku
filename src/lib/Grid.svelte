@@ -65,8 +65,12 @@
         if (!$pencilMode) {
           $data[$activeBigCell][$activeSmallCell].value = Number(e.key)
         } else if ($pencilMode) {
-          // console.log($data[$activeBigCell][$activeSmallCell].pencilMarks)
-          $data[$activeBigCell][$activeSmallCell].pencilMarks.add(Number(e.key))
+          $data[$activeBigCell][$activeSmallCell].pencilMarks[
+            Number(e.key) - 1
+          ].selected =
+            !$data[$activeBigCell][$activeSmallCell].pencilMarks[
+              Number(e.key) - 1
+            ].selected
         }
       }
     } else {
@@ -79,7 +83,7 @@
 
 <div>
   {#each $data as big, i}
-    <BigCell {pencilMode} {big} />
+    <BigCell {big} />
   {/each}
 </div>
 
