@@ -6,10 +6,8 @@
 
   function handleKeyDown(e: KeyboardEvent) {
     if (e.key == 'Escape') {
-      e.preventDefault()
       pencilMode = !pencilMode
     } else if (e.key == 'j') {
-      console.log($activeBigCell)
       if ($activeBigCell >= 6 && $activeSmallCell >= 6) return
       $data[$activeBigCell][$activeSmallCell].active = false
       if ($activeSmallCell >= 6) {
@@ -17,7 +15,6 @@
         $activeSmallCell -= 6
       } else $activeSmallCell += 3
     } else if (e.key == 'k') {
-      console.log($activeBigCell)
       if ($activeBigCell == 0 && $activeSmallCell <= 2) return
       $data[$activeBigCell][$activeSmallCell].active = false
 
@@ -44,11 +41,22 @@
         $activeSmallCell -= 2
       } else $activeSmallCell++
     } else if (e.key == 'h') {
-      if ($activeBigCell == 0 && $activeSmallCell == 0) return
+      if (
+        ($activeBigCell == 0 || $activeBigCell == 3 || $activeBigCell == 6) &&
+        ($activeSmallCell == 0 ||
+          $activeSmallCell == 3 ||
+          $activeSmallCell == 6)
+      )
+        return
       $data[$activeBigCell][$activeSmallCell].active = false
-      if ($activeSmallCell == 0) {
+
+      if (
+        $activeSmallCell == 0 ||
+        $activeSmallCell == 3 ||
+        $activeSmallCell == 6
+      ) {
         $activeBigCell--
-        $activeSmallCell = 2
+        $activeSmallCell += 2
       } else $activeSmallCell--
     }
   }
