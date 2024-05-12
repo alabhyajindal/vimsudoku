@@ -2,25 +2,17 @@
   import BigCell from './BigCell.svelte'
   import { activeBigCell, activeSmallCell, data, pencilMode } from './store'
 
-  let currentCell: any
-
-  $: {
-    currentCell = $data[$activeBigCell][$activeSmallCell]
-    if (currentCell) currentCell.active = true
-  }
-
   function navigate(e: KeyboardEvent) {
     if (e.key == 'j') {
       if ($activeBigCell >= 6 && $activeSmallCell >= 6) return
-      currentCell.active = false
-
+      $data[$activeBigCell][$activeSmallCell].active = false
       if ($activeSmallCell >= 6) {
         $activeBigCell += 3
         $activeSmallCell -= 6
       } else $activeSmallCell += 3
     } else if (e.key == 'k') {
       if ($activeBigCell == 0 && $activeSmallCell <= 2) return
-      currentCell.active = false
+      $data[$activeBigCell][$activeSmallCell].active = false
 
       if ($activeSmallCell <= 2) {
         $activeBigCell -= 3
@@ -34,7 +26,7 @@
           $activeSmallCell == 8)
       )
         return
-      currentCell.active = false
+      $data[$activeBigCell][$activeSmallCell].active = false
 
       if (
         $activeSmallCell == 2 ||
@@ -52,7 +44,7 @@
           $activeSmallCell == 6)
       )
         return
-      currentCell.active = false
+      $data[$activeBigCell][$activeSmallCell].active = false
 
       if (
         $activeSmallCell == 0 ||
@@ -69,13 +61,20 @@
     if (e.key == 'Escape' || (e.ctrlKey && e.key == '[')) {
       $pencilMode = !$pencilMode
     } else if (Number(e.key)) {
-      if (!currentCell.prefilled) {
-        currentCell.value = Number(e.key)
+      if (!$data[$activeBigCell][$activeSmallCell].prefilled) {
+        if (!$pencilMode) {
+          $data[$activeBigCell][$activeSmallCell].value = Number(e.key)
+        } else if ($pencilMode) {
+          // console.log($data[$activeBigCell][$activeSmallCell].pencilMarks)
+          $data[$activeBigCell][$activeSmallCell].pencilMarks.add(Number(e.key))
+        }
       }
     } else {
       navigate(e)
     }
   }
+
+  $: $data[$activeBigCell][$activeSmallCell].active = true
 </script>
 
 <div>

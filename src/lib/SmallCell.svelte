@@ -7,10 +7,10 @@
 
 <div class={small.active ? 'small small-active' : 'small'}>
   <div class="answer">{small.value}</div>
-  <div class={answer ? 'pencil-marks hidden' : 'pencil-marks'}>
+  <div class="pencil-marks">
     {#each small.pencilMarks as mark}
-      <div class={mark.selected ? 'pencil-mark' : 'pencil-mark hidden'}>
-        {mark.value}
+      <div class="pencil-mark">
+        {mark}
       </div>
     {/each}
   </div>
@@ -44,6 +44,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     font-size: 0.8em;
+    z-index: 2;
     font-weight: 600;
   }
   .pencil-mark {

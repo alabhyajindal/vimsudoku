@@ -54,6 +54,15 @@ function generatePuzzle() {
   return bigSquares
 }
 
+interface Small {
+  answer: number
+  pencilMarks: Set<number>
+  value: '' | number
+  active: boolean
+  index: number
+  prefilled: boolean
+}
+
 export function generateData() {
   const puzzle = generatePuzzle()
 
@@ -61,7 +70,15 @@ export function generateData() {
     return p.map((answer, index) => {
       const prefilled = Math.random() > 0.45
       const value = prefilled ? answer : ''
-      return { answer, pencilMarks: [], value, active: false, index, prefilled }
+      const small: Small = {
+        answer,
+        pencilMarks: new Set(),
+        value,
+        active: false,
+        index,
+        prefilled,
+      }
+      return small
     })
   })
 
