@@ -26,7 +26,13 @@
         $activeSmallCell += 6
       } else $activeSmallCell -= 3
     } else if (e.key == 'l') {
-      if ($activeBigCell == 2 && $activeSmallCell == 2) return
+      if (
+        ($activeBigCell == 2 || $activeBigCell == 5 || $activeBigCell == 8) &&
+        ($activeSmallCell == 2 ||
+          $activeSmallCell == 5 ||
+          $activeSmallCell == 8)
+      )
+        return
       $data[$activeBigCell][$activeSmallCell].active = false
 
       if (
@@ -35,7 +41,7 @@
         $activeSmallCell == 8
       ) {
         $activeBigCell++
-        $activeSmallCell = 0
+        $activeSmallCell -= 2
       } else $activeSmallCell++
     } else if (e.key == 'h') {
       if ($activeBigCell == 0 && $activeSmallCell == 0) return
