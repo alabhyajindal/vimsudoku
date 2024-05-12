@@ -1,11 +1,11 @@
 <script lang="ts">
   import Grid from './lib/Grid.svelte'
-  let pencilMode = false
+  import { pencilMode } from './lib/store'
 </script>
 
 <main>
-  <!-- <p>{pencilMode ? 'pencil' : 'solve'}</p> -->
-  <Grid {pencilMode} />
+  <Grid />
+  <p class="mode-indicator">{$pencilMode ? 'pencil' : 'solve'}</p>
 </main>
 
 <style>
@@ -36,5 +36,14 @@
   main {
     max-width: 500px;
     margin-inline: auto;
+  }
+
+  .mode-indicator {
+    font-family: monospace;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--dark-blue);
+    margin-top: 1em;
+    font-size: 1.2em;
   }
 </style>

@@ -57,7 +57,6 @@ function generatePuzzle() {
 export function generateData() {
   const puzzle = generatePuzzle()
 
-  let filled = 0
   let data = puzzle.map((p) => {
     return p.map((answer, index) => {
       const value = Math.random() > 0.45 ? answer : ''

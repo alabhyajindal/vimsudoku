@@ -1,12 +1,10 @@
 <script lang="ts">
   import BigCell from './BigCell.svelte'
-  import { activeBigCell, activeSmallCell, data } from './store'
-
-  export let pencilMode: boolean
+  import { activeBigCell, activeSmallCell, data, pencilMode } from './store'
 
   function handleKeyDown(e: KeyboardEvent) {
-    if (e.key == 'Escape') {
-      pencilMode = !pencilMode
+    if (e.key == 'Escape' || (e.ctrlKey && e.key == '[')) {
+      $pencilMode = !$pencilMode
     } else if (e.key == 'j') {
       if ($activeBigCell >= 6 && $activeSmallCell >= 6) return
       $data[$activeBigCell][$activeSmallCell].active = false
