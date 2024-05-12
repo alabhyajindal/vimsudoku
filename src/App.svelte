@@ -17,7 +17,8 @@
 
   :global(body) {
     background-color: var(--background-blue);
-    padding: 12px;
+    padding-top: 3em;
+    padding-inline: 2em;
   }
 
   :global(:root) {

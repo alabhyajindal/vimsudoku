@@ -9,11 +9,12 @@
       e.preventDefault()
       pencilMode = !pencilMode
     } else if (e.key == 'j') {
-      if ($activeBigCell == 6 && $activeSmallCell >= 6) return
+      console.log($activeBigCell)
+      if ($activeBigCell >= 6 && $activeSmallCell >= 6) return
       $data[$activeBigCell][$activeSmallCell].active = false
       if ($activeSmallCell >= 6) {
         $activeBigCell += 3
-        $activeSmallCell = 0
+        $activeSmallCell -= 6
       } else $activeSmallCell += 3
     } else if (e.key == 'k') {
       if ($activeBigCell == 0 && $activeSmallCell == 0) return
