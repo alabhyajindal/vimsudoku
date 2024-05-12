@@ -17,14 +17,14 @@
         $activeSmallCell -= 6
       } else $activeSmallCell += 3
     } else if (e.key == 'k') {
-      if ($activeBigCell == 0 && $activeSmallCell == 0) return
+      console.log($activeBigCell)
+      if ($activeBigCell == 0 && $activeSmallCell <= 2) return
       $data[$activeBigCell][$activeSmallCell].active = false
 
-      if ($activeSmallCell == 0) {
+      if ($activeSmallCell <= 2) {
         $activeBigCell -= 3
-        $activeSmallCell = 9
-      }
-      $activeSmallCell -= 3
+        $activeSmallCell += 6
+      } else $activeSmallCell -= 3
     } else if (e.key == 'l') {
       if ($activeBigCell == 2 && $activeSmallCell == 2) return
       $data[$activeBigCell][$activeSmallCell].active = false
