@@ -9,15 +9,19 @@
     columns,
     activeColumn,
     activeRow,
+    rows,
   } from './store'
 
   function navigate(e: KeyboardEvent) {
     if (e.key == 'j') {
-      // if ($activeRow + 1 <= 8) {
-      //   $columns[$activeColumn][$activeRow].active = false
-      //   $activeRow++
-      //   $columns[$activeColumn][$activeRow].active = true
-      // }
+      if ($activeRow + 1 <= 8) {
+        console.log('here')
+        console.log($columns[$activeColumn][$activeRow])
+        $columns[$activeColumn][$activeRow].active = false
+        $activeRow++
+        $columns[$activeColumn][$activeRow].active = true
+      }
+      return
 
       if ($activeBigCell >= 6 && $activeSmallCell >= 6) return
       $bigCells[$activeBigCell][$activeSmallCell].active = false
@@ -34,6 +38,12 @@
         $activeSmallCell += 6
       } else $activeSmallCell -= 3
     } else if (e.key == 'l') {
+      $rows[$activeRow][$activeColumn].active = false
+      $activeColumn++
+      $rows[$activeRow][$activeColumn].active = true
+
+      return
+
       if (
         ($activeBigCell == 2 || $activeBigCell == 5 || $activeBigCell == 8) &&
         ($activeSmallCell == 2 ||
@@ -100,9 +110,11 @@
     }
   }
 
-  $: $bigCells[$activeBigCell][$activeSmallCell].active = true
+  // $: $bigCells[$activeBigCell][$activeSmallCell].active = true
 
-  $: $columns[$activeColumn][$activeRow].active = true
+  // $: $columns[$activeColumn][$activeRow].active = true
+
+  $: console.log($bigCells)
 </script>
 
 <div>
