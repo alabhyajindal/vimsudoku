@@ -10,7 +10,7 @@
   class={clsx({
     small: true,
     'small-active': small.active,
-    incorrect: small.value !== small.answer,
+    incorrect: small.value !== small.answer && small.answer !== '',
     highlighted:
       small.columnIndex == $activeColumn ||
       small.rowIndex == $activeRow ||
@@ -18,7 +18,11 @@
       $activeBigCell == bigCellIndex,
   })}
 >
-  <div class="answer">
+  <div
+    class={clsx({
+      answer: true,
+    })}
+  >
     {small.value}
   </div>
   <div
@@ -68,6 +72,7 @@
     font-size: 0.8em;
     z-index: 2;
     font-weight: 600;
+    color: var(--dark-blue);
   }
 
   .pencil-mark {
