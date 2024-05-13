@@ -1,6 +1,6 @@
 <script lang="ts">
   import Sudoku from './lib/Sudoku.svelte'
-  import { pencilMode, mistakes } from './lib/store'
+  import { pencilMode, mistakes, activeColumn, activeRow } from './lib/store'
 
   function formattedTime(elapsedSeconds: number) {
     const hours = Math.floor(elapsedSeconds / 3600)
@@ -11,14 +11,8 @@
 
     let formattedTime = ''
 
-    if (hours) {
-      formattedTime += `${hours}h `
-    }
-
-    if (minutes) {
-      formattedTime += `${minutes}m `
-    }
-
+    if (hours) formattedTime += `${hours}h `
+    if (minutes) formattedTime += `${minutes}m `
     formattedTime += `${seconds}s`
 
     return formattedTime.trim()
@@ -46,7 +40,11 @@
   <Sudoku />
 
   <div class="bottom">
-    <p class="mode-indicator">{$pencilMode ? 'pencil' : 'solve'}</p>
+    <p class="mode-indicator">--{$pencilMode ? 'pencil' : 'solve'}--</p>
+    <div class="bottom-right">
+      <p class="cell-indicator">{$activeRow + 1},{$activeColumn + 1}</p>
+      <p class="content-indicator">All</p>
+    </div>
   </div>
 </main>
 
@@ -95,7 +93,7 @@
   }
 
   h1 {
-    font-size: 1.6em;
+    font-size: 1.4em;
     color: var(--title-black);
   }
 
@@ -111,14 +109,27 @@
   }
 
   .bottom {
+    font-family: monospace;
+    background-color: var(--dark-blue);
+    color: white;
     margin-top: 1em;
-    color: var(--dark-blue);
     font-weight: 600;
+    font-size: 1.2em;
+    padding: 2px;
+    padding-top: 4px;
+    padding-inline: 4px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .bottom-right {
+    display: flex;
+    gap: 4em;
   }
 
   .mode-indicator {
-    font-family: monospace;
     text-transform: uppercase;
-    font-size: 1.2em;
   }
 </style>
