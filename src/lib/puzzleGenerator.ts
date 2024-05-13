@@ -10,6 +10,7 @@ export interface Small {
   active: boolean
   index: number
   prefilled: boolean
+  highlighted: boolean
 }
 
 export function createData(): {
@@ -100,6 +101,7 @@ function addCellData(grid: number[][]) {
         index,
         prefilled,
         active: false,
+        highlighted: false,
       }
       return small
     })

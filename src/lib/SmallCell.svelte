@@ -4,8 +4,15 @@
   export let small
 </script>
 
-<div class={clsx({ small: true, 'small-active': small.active })}>
-  <div class={clsx({ answer: true, incorrect: small.value !== small.answer })}>
+<div
+  class={clsx({
+    small: true,
+    'small-active': small.active,
+    incorrect: small.value !== small.answer,
+    highlighted: small.highlighted,
+  })}
+>
+  <div class={clsx({ answer: true })}>
     {small.value}
   </div>
   <div
@@ -70,5 +77,9 @@
 
   .incorrect {
     color: var(--incorrect-red);
+  }
+
+  .highlighted {
+    background-color: pink;
   }
 </style>
