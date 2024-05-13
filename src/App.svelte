@@ -28,8 +28,7 @@
     --bright-blue: #325aaf;
     --incorrect-red: #e55c6c;
     --title-black: #0f172a;
-    --highlighted-bg: #e2ebf3;
-    --highlighted-number: #c3d7ea;
+    --highlighted-bg: #d0d8df;
     --timer-gray: #94a3b7;
   }
 

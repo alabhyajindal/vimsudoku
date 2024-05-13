@@ -1,10 +1,8 @@
 <script lang="ts">
   import { clsx } from 'clsx'
-  import { pencilMode, activeColumn } from './store'
+  import { pencilMode, activeColumn, activeRow } from './store'
 
   export let small
-
-  $: console.log(small)
 </script>
 
 <div
@@ -12,10 +10,10 @@
     small: true,
     'small-active': small.active,
     incorrect: small.value !== small.answer,
-    highlighted: small.index == $activeColumn,
+    highlighted: small.index == $activeColumn || small.index2 == $activeRow,
   })}
 >
-  <div class={clsx({ answer: true })}>
+  <div class="answer">
     {small.value}
   </div>
   <div

@@ -84,7 +84,7 @@ export function createData(): {
 }
 
 function addCellData(grid: number[][]) {
-  const result = grid.map((row) => {
+  const result = grid.map((row, i) => {
     return row.map((answer, index) => {
       // const prefilled = Math.random() > 0.45
       const prefilled = Math.random() > 0.01
@@ -99,6 +99,7 @@ function addCellData(grid: number[][]) {
         pencilMarks,
         value,
         index,
+        index2: i,
         prefilled,
         active: false,
         highlighted: false,
