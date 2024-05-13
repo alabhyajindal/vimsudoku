@@ -1,11 +1,53 @@
 <script lang="ts">
-  import Grid from './lib/Grid.svelte'
-  import { pencilMode } from './lib/store'
+  import Sudoku from './lib/Sudoku.svelte'
+  import { pencilMode, mistakes } from './lib/store'
+
+  function formattedTime(elapsedSeconds: number) {
+    const hours = Math.floor(elapsedSeconds / 3600)
+    const remainingSeconds = elapsedSeconds % 3600
+
+    const minutes = Math.floor(remainingSeconds / 60)
+    const seconds = remainingSeconds % 60
+
+    let formattedTime = ''
+
+    if (hours) {
+      formattedTime += `${hours}h `
+    }
+
+    if (minutes) {
+      formattedTime += `${minutes}m `
+    }
+
+    formattedTime += `${seconds}s`
+
+    return formattedTime.trim()
+  }
+
+  let elapsedTime = 0
+  setInterval(() => {
+    elapsedTime += 1
+  }, 1000)
 </script>
 
 <main>
-  <Grid />
-  <p class="mode-indicator">{$pencilMode ? 'pencil' : 'solve'}</p>
+  <div class="top">
+    <div>
+      <h1>Vim Sudoku</h1>
+    </div>
+    <div class="top-right">
+      <p class="mistakes"><span class="label">Mistakes: </span>{$mistakes}/5</p>
+      <p class="time">
+        {formattedTime(elapsedTime)}
+      </p>
+    </div>
+  </div>
+
+  <Sudoku />
+
+  <div class="bottom">
+    <p class="mode-indicator">{$pencilMode ? 'pencil' : 'solve'}</p>
+  </div>
 </main>
 
 <style>
@@ -37,12 +79,46 @@
     margin-inline: auto;
   }
 
+  .top {
+    color: var(--dark-blue);
+    margin-bottom: 0.8em;
+    font-weight: 600;
+    font-size: 0.95em;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+  }
+
+  .top-right {
+    display: flex;
+    gap: 2em;
+  }
+
+  h1 {
+    font-size: 1.6em;
+    color: var(--title-black);
+  }
+
+  .time {
+    display: flex;
+    justify-content: end;
+    position: relative;
+    min-width: 7em;
+  }
+
+  .label {
+    opacity: 60%;
+  }
+
+  .bottom {
+    margin-top: 1em;
+    color: var(--dark-blue);
+    font-weight: 600;
+  }
+
   .mode-indicator {
     font-family: monospace;
     text-transform: uppercase;
-    font-weight: 600;
-    color: var(--dark-blue);
-    margin-top: 1em;
     font-size: 1.2em;
   }
 </style>

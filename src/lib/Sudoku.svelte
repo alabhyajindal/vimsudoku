@@ -9,6 +9,7 @@
     activeRow,
     rows,
     activeBigCell,
+    mistakes,
   } from './store'
 
   function navigate(e: KeyboardEvent) {
@@ -54,6 +55,12 @@
       if (!$columns[$activeColumn][$activeRow].prefilled) {
         if (!$pencilMode) {
           $columns[$activeColumn][$activeRow].value = Number(e.key)
+          if (
+            $columns[$activeColumn][$activeRow].value !==
+            $columns[$activeColumn][$activeRow].answer
+          ) {
+            $mistakes++
+          }
 
           $columns[$activeColumn][$activeRow].pencilMarks = $columns[
             $activeColumn

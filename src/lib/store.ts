@@ -7,8 +7,6 @@ export const activeSmallCell = writable(0)
 export const activeColumn = writable(0)
 export const activeRow = writable(0)
 
-export const pencilMode = writable(false)
-
 const data = createData()
 export const rows = writable<Small[][]>(data.rows)
 export const columns = writable<Small[][]>(data.columns)
@@ -29,3 +27,7 @@ export const bigCells = derived(rows, ($rows) => {
   }
   return bigCells
 })
+
+export const pencilMode = writable(false)
+
+export const mistakes = writable(0)
