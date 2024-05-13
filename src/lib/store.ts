@@ -1,5 +1,5 @@
 import { derived, writable } from 'svelte/store'
-import { createData } from './puzzleGenerator'
+import { createData, type Small } from './puzzleGenerator'
 import type { Writable } from 'svelte/store'
 
 const data = createData()
@@ -18,7 +18,7 @@ export const pencilMode = writable(false)
 
 const newData = createData()
 
-export const rows = writable(newData.rows)
+export const rows = writable<Small[][]>(newData.rows)
 
 export const bigCells = derived(rows, ($rows) => {
   const bigCells = []
@@ -44,4 +44,4 @@ export const bigCells = derived(rows, ($rows) => {
 //   return columns
 // })
 
-export const columns = writable(newData.columns)
+export const columns = writable<Small[][]>(newData.columns)

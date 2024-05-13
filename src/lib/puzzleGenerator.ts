@@ -12,7 +12,11 @@ export interface Small {
   prefilled: boolean
 }
 
-export function createData() {
+export function createData(): {
+  bigCells: Small[][]
+  columns: Small[][]
+  rows: Small[][]
+} {
   let grid = [...Array(9)].map(() => Array(9).fill(0))
 
   function backtrack(row: number, col: number) {
@@ -68,7 +72,7 @@ export function createData() {
   }
 
   // Create nested arrays for columns and rows
-  const columns: number[][] = []
+  const columns = []
   for (let col = 0; col < 9; col++) {
     columns.push(grid.map((row) => row[col]))
   }
@@ -78,7 +82,7 @@ export function createData() {
   return { bigCells, columns, rows }
 }
 
-function addCellData(grid: [][]) {
+function addCellData(grid: number[][]) {
   const result = grid.map((row) => {
     return row.map((answer, index) => {
       const prefilled = Math.random() > 0.45
