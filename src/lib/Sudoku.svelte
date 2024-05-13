@@ -50,10 +50,12 @@
 
   function handleKeyDown(e: KeyboardEvent) {
     if (e.key == 'Escape' || (e.ctrlKey && e.key == '[')) {
-      $pencilMode = !$pencilMode
+      if ($pencilMode == 'pencil') $pencilMode = 'solve'
+      else if ($pencilMode == 'solve') $pencilMode = 'pencil'
+      else if ($pencilMode == 'cmd') $pencilMode = 'pencil'
     } else if (Number(e.key)) {
       if (!$columns[$activeColumn][$activeRow].prefilled) {
-        if (!$pencilMode) {
+        if ($pencilMode == 'solve') {
           $columns[$activeColumn][$activeRow].value = Number(e.key)
           if (
             $columns[$activeColumn][$activeRow].value !==
@@ -68,7 +70,7 @@
             ...v,
             selected: false,
           }))
-        } else if ($pencilMode) {
+        } else if ($pencilMode == 'pencil') {
           $columns[$activeColumn][$activeRow].value = ''
           $columns[$activeColumn][$activeRow].pencilMarks[
             Number(e.key) - 1

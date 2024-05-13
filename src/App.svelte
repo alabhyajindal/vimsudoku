@@ -25,7 +25,9 @@
 </script>
 
 <section>
-  <div class="side left">Left</div>
+  <div class="side left">
+    <p>Play Sudoku with Vim</p>
+  </div>
 
   <main>
     <div class="top">
@@ -44,11 +46,13 @@
 
     <Sudoku />
 
-    <div class="bottom">
-      <p class="mode-indicator">--{$pencilMode ? 'pencil' : 'solve'}--</p>
-      <div class="bottom-right">
-        <p class="cell-indicator">{$activeRow + 1},{$activeColumn + 1}</p>
-        <p class="content-indicator">All</p>
+    <div class="vim-bottom">
+      <div class="bottom">
+        <p class="mode-indicator">--{$pencilMode}--</p>
+        <div class="bottom-right">
+          <p class="cell-indicator">{$activeRow + 1},{$activeColumn + 1}</p>
+          <p class="content-indicator">All</p>
+        </div>
       </div>
     </div>
   </main>
@@ -131,13 +135,17 @@
     opacity: 60%;
   }
 
-  .bottom {
+  .vim-bottom {
     font-family: monospace;
+    font-weight: 600;
+    font-size: 1.2em;
+  }
+
+  .bottom {
     background-color: var(--dark-blue);
     color: white;
     margin-top: 1em;
-    font-weight: 600;
-    font-size: 1.2em;
+
     padding: 2px;
     padding-top: 4px;
     padding-inline: 4px;
