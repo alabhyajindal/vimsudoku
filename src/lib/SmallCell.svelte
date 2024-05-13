@@ -1,11 +1,17 @@
 <script lang="ts">
   import { clsx } from 'clsx'
+  import { pencilMode } from './store'
   export let small
 </script>
 
 <div class={clsx({ small: true, 'small-active': small.active })}>
   <div class="answer">{small.value}</div>
-  <div class="pencil-marks">
+  <div
+    class={clsx({
+      'pencil-marks': true,
+      hidden: small.value,
+    })}
+  >
     {#each small.pencilMarks as mark}
       <div class={clsx({ 'pencil-mark': true, hidden: !mark.selected })}>
         {mark.value}

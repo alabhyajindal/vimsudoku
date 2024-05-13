@@ -63,8 +63,15 @@
     } else if (Number(e.key)) {
       if (!$data[$activeBigCell][$activeSmallCell].prefilled) {
         if (!$pencilMode) {
+          $data[$activeBigCell][$activeSmallCell].pencilMarks = $data[
+            $activeBigCell
+          ][$activeSmallCell].pencilMarks.map((v) => ({
+            ...v,
+            selected: false,
+          }))
           $data[$activeBigCell][$activeSmallCell].value = Number(e.key)
         } else if ($pencilMode) {
+          $data[$activeBigCell][$activeSmallCell].value = ''
           $data[$activeBigCell][$activeSmallCell].pencilMarks[
             Number(e.key) - 1
           ].selected =
