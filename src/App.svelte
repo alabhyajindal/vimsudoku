@@ -58,13 +58,11 @@
 
     <Sudoku />
 
-    <div class="vim-bottom">
-      <div class="bottom">
-        <p class="mode-indicator">--{$inputMode}--</p>
-        <div class="bottom-right">
-          <p class="cell-indicator">{$activeRow + 1},{$activeColumn + 1}</p>
-          <p class="content-indicator">All</p>
-        </div>
+    <div class="bottom">
+      <p class="mode-indicator">--{$inputMode}--</p>
+      <div class="bottom-right">
+        <p class="cell-indicator">{$activeRow + 1},{$activeColumn + 1}</p>
+        <p class="content-indicator">All</p>
       </div>
     </div>
   </main>
@@ -87,7 +85,7 @@
           </li>
           <li>
             <a href="https://forms.gle/uvTWNFR6nzc8gC1A7" target="_blank"
-              >Share feedback</a
+              >Send feedback</a
             >
           </li>
         </ul>
@@ -121,10 +119,16 @@
     --title-black: #0f172a;
     --highlighted-bg: #dee2e6;
     --pencil-blue: #2f4157;
+    --label-blue: #717f90;
   }
 
   section {
     display: flex;
+  }
+
+  ::selection {
+    background-color: var(--bright-blue);
+    color: white;
   }
 
   main {
@@ -164,7 +168,8 @@
 
   .sign {
     position: absolute;
-    bottom: 2em;
+    bottom: 0;
+    font-weight: 500;
 
     right: 0;
     margin-bottom: 2em;
@@ -198,13 +203,7 @@
   }
 
   .label {
-    opacity: 60%;
-  }
-
-  .vim-bottom {
-    font-family: monospace;
-    font-weight: 700;
-    font-size: 1.2em;
+    color: var(--label-blue);
   }
 
   li {
@@ -221,16 +220,20 @@
   }
 
   .bottom {
-    color: var(--bright-blue);
-    margin-top: 1em;
+    font-family: monospace;
+    font-weight: 700;
+    font-size: 1.2em;
 
-    padding: 2px;
-    padding-top: 4px;
-    padding-inline: 4px;
+    color: var(--bright-blue);
+
+    margin-block: 1em;
+    padding-bottom: 1em;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    /* border-bottom: 1.6px solid var(--bright-blue); */
   }
 
   .bottom-right {
@@ -243,8 +246,9 @@
   }
 
   .side {
-    color: var(--title-black);
-    margin-top: 4em;
+    font-size: 1.1em;
+    color: var(--dark-blue);
+    margin-top: 3em;
     font-weight: 450;
   }
 
