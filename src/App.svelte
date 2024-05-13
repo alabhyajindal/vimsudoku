@@ -70,8 +70,11 @@
   </main>
 
   <div class="side right">
-    <p><a href="https://forms.gle/uvTWNFR6nzc8gC1A7">Feedback?</a></p>
-    <p class="sign">Alabhya Jindal</p>
+    <div class="outro">
+      <p class="sign">
+        <a href="http://alabhyajindal.com" target="_blank">Alabhya Jindal</a>
+      </p>
+    </div>
   </div>
 </section>
 
@@ -85,7 +88,7 @@
   :global(body) {
     background-color: var(--background-blue);
     padding-top: 3em;
-    padding-inline: 4em;
+    padding-inline: 2em;
   }
 
   :global(:root) {
@@ -117,6 +120,15 @@
 
   .right {
     text-align: right;
+    position: relative;
+  }
+
+  .outro {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 2em;
+    right: 0;
+    color: var(--bright-blue);
   }
 
   .top {
@@ -152,13 +164,21 @@
 
   .vim-bottom {
     font-family: monospace;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 1.2em;
   }
 
+  a {
+    color: var(--dark-blue);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
   .bottom {
-    background-color: var(--dark-blue);
-    color: white;
+    color: var(--bright-blue);
     margin-top: 1em;
 
     padding: 2px;
@@ -195,15 +215,6 @@
     margin-inline: 4px;
     font-weight: 600;
   }
-
-  .intro {
-  }
-
-  /* .intro > p:first-child {
-    font-size: 1.2em;
-    font-weight: 500;
-    margin-bottom: 1.6em;
-  } */
 
   .guide {
     font-size: 1em;
