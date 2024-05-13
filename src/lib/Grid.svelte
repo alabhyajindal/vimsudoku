@@ -1,9 +1,24 @@
 <script lang="ts">
+  import App from '../App.svelte'
   import BigCell from './BigCell.svelte'
-  import { activeBigCell, activeSmallCell, bigCells, pencilMode } from './store'
+  import {
+    activeBigCell,
+    activeSmallCell,
+    bigCells,
+    pencilMode,
+    columns,
+    activeColumn,
+    activeRow,
+  } from './store'
 
   function navigate(e: KeyboardEvent) {
     if (e.key == 'j') {
+      // if ($activeRow + 1 <= 8) {
+      //   $columns[$activeColumn][$activeRow].active = false
+      //   $activeRow++
+      //   $columns[$activeColumn][$activeRow].active = true
+      // }
+
       if ($activeBigCell >= 6 && $activeSmallCell >= 6) return
       $bigCells[$activeBigCell][$activeSmallCell].active = false
       if ($activeSmallCell >= 6) {
@@ -86,6 +101,8 @@
   }
 
   $: $bigCells[$activeBigCell][$activeSmallCell].active = true
+
+  $: $columns[$activeColumn][$activeRow].active = true
 </script>
 
 <div>
