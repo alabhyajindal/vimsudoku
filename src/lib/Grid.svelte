@@ -8,6 +8,7 @@
     activeColumn,
     activeRow,
     rows,
+    activeBigCell,
   } from './store'
 
   function navigate(e: KeyboardEvent) {
@@ -73,19 +74,28 @@
     return false
   }
 
-  $: if (checkCompletion($columns)) console.log('puzzle done')
+  // $: if (checkCompletion($columns)) console.log('puzzle done')
+
+  function getActiveBigCell(activeColumn: number, activeRow: number) {
+    const bigCellRow = Math.floor(activeRow / 3)
+    const bigCellCol = Math.floor(activeColumn / 3)
+
+    return bigCellRow * 3 + bigCellCol
+  }
 
   $: {
     $columns[$activeColumn][$activeRow].active = true
     $rows[$activeRow][$activeColumn].active = true
     $columns[$activeColumn][$activeRow].value =
       $columns[$activeColumn][$activeRow].value
+
+    $activeBigCell = getActiveBigCell($activeColumn, $activeRow)
   }
 </script>
 
 <div>
   {#each $bigCells as big, i}
-    <BigCell {big} />
+    <BigCell {big} bigCellIndex={i} />
   {/each}
 </div>
 

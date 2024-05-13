@@ -12,6 +12,7 @@ export const pencilMode = writable(false)
 const data = createData()
 export const rows = writable<Small[][]>(data.rows)
 export const columns = writable<Small[][]>(data.columns)
+// export const bigCells = writable<Small[][]>(data.bigCells)
 
 export const bigCells = derived(rows, ($rows) => {
   const bigCells = []

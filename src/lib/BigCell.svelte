@@ -2,11 +2,12 @@
   import SmallCell from './SmallCell.svelte'
 
   export let big
+  export let bigCellIndex
 </script>
 
 <div>
   {#each big as small, i}
-    <SmallCell {small} />
+    <SmallCell {small} {bigCellIndex} />
   {/each}
 </div>
 

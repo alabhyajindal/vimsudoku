@@ -1,8 +1,9 @@
 <script lang="ts">
   import { clsx } from 'clsx'
-  import { pencilMode, activeColumn, activeRow } from './store'
+  import { pencilMode, activeColumn, activeRow, activeBigCell } from './store'
 
   export let small
+  export let bigCellIndex
 </script>
 
 <div
@@ -11,7 +12,10 @@
     'small-active': small.active,
     incorrect: small.value !== small.answer,
     highlighted:
-      small.columnIndex == $activeColumn || small.rowIndex == $activeRow,
+      small.columnIndex == $activeColumn ||
+      small.rowIndex == $activeRow ||
+      bigCellIndex == activeBigCell ||
+      $activeBigCell == bigCellIndex,
   })}
 >
   <div class="answer">
