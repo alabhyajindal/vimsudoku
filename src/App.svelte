@@ -70,28 +70,28 @@
   </main>
 
   <div class="side right">
-    <div class="links">
-      <ul>
-        <li>
-          <a
-            href="https://superuser.com/questions/246487/how-to-use-vimtutor"
-            target="_blank">Learn Vim</a
-          >
-        </li>
-        <li>
-          <a
-            href="https://youtu.be/8zRXDsGydeQ?si=BQnRRL4y0SwHzsTe"
-            target="_blank">Learn Sudoku</a
-          >
-        </li>
-        <li>
-          <a href="https://forms.gle/uvTWNFR6nzc8gC1A7" target="_blank"
-            >Share feedback</a
-          >
-        </li>
-      </ul>
-    </div>
-    <div class="outro">
+    <div class="right-inner">
+      <div class="links">
+        <ul>
+          <li>
+            <a
+              href="https://superuser.com/questions/246487/how-to-use-vimtutor"
+              target="_blank">Learn Vim</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://youtu.be/8zRXDsGydeQ?si=BQnRRL4y0SwHzsTe"
+              target="_blank">Learn Sudoku</a
+            >
+          </li>
+          <li>
+            <a href="https://forms.gle/uvTWNFR6nzc8gC1A7" target="_blank"
+              >Share feedback</a
+            >
+          </li>
+        </ul>
+      </div>
       <p class="sign">
         <a href="http://alabhyajindal.com" target="_blank">Alabhya Jindal</a>
       </p>
@@ -139,17 +139,35 @@
     min-width: 400px;
   }
 
+  .links {
+    margin-bottom: 5em;
+  }
+
   .right {
-    text-align: right;
     position: relative;
   }
 
-  .outro {
+  .links a {
+    color: var(--dark-blue);
+  }
+
+  .links {
+    color: var(--dark-blue);
     position: absolute;
-    bottom: 0;
-    margin-bottom: 2em;
     right: 0;
     color: var(--bright-blue);
+  }
+
+  .sign a {
+    color: var(--bright-blue);
+  }
+
+  .sign {
+    position: absolute;
+    bottom: 2em;
+
+    right: 0;
+    margin-bottom: 2em;
   }
 
   .top {
@@ -195,7 +213,6 @@
   }
 
   a {
-    color: var(--dark-blue);
     text-decoration: none;
   }
 
@@ -229,9 +246,6 @@
     color: var(--title-black);
     margin-top: 4em;
     font-weight: 450;
-  }
-
-  .sign {
   }
 
   code {
