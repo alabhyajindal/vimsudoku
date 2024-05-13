@@ -24,29 +24,37 @@
   }, 1000)
 </script>
 
-<main>
-  <div class="top">
-    <div>
-      <h1>Vim Sudoku</h1>
-    </div>
-    <div class="top-right">
-      <p class="mistakes"><span class="label">Mistakes: </span>{$mistakes}/5</p>
-      <p class="time">
-        {formattedTime(elapsedTime)}
-      </p>
-    </div>
-  </div>
+<section>
+  <div class="side left">Left</div>
 
-  <Sudoku />
-
-  <div class="bottom">
-    <p class="mode-indicator">--{$pencilMode ? 'pencil' : 'solve'}--</p>
-    <div class="bottom-right">
-      <p class="cell-indicator">{$activeRow + 1},{$activeColumn + 1}</p>
-      <p class="content-indicator">All</p>
+  <main>
+    <div class="top">
+      <div>
+        <h1>Vim Sudoku</h1>
+      </div>
+      <div class="top-right">
+        <p class="mistakes">
+          <span class="label">Mistakes: </span>{$mistakes}/5
+        </p>
+        <p class="time">
+          {formattedTime(elapsedTime)}
+        </p>
+      </div>
     </div>
-  </div>
-</main>
+
+    <Sudoku />
+
+    <div class="bottom">
+      <p class="mode-indicator">--{$pencilMode ? 'pencil' : 'solve'}--</p>
+      <div class="bottom-right">
+        <p class="cell-indicator">{$activeRow + 1},{$activeColumn + 1}</p>
+        <p class="content-indicator">All</p>
+      </div>
+    </div>
+  </main>
+
+  <div class="side right">Right</div>
+</section>
 
 <style>
   :global(*) {
@@ -72,9 +80,24 @@
     --pencil-blue: #2f4157;
   }
 
+  section {
+    display: flex;
+  }
+
   main {
+    flex: 0 0 500px;
     max-width: 500px;
     margin-inline: auto;
+    flex-grow: 1;
+  }
+
+  .side {
+    flex: 0 1;
+    min-width: 400px;
+  }
+
+  .right {
+    text-align: right;
   }
 
   .top {
