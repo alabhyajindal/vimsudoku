@@ -38,7 +38,7 @@ function generatePuzzle() {
   backtrack(0, 0)
 
   // Create the big squares
-  const bigSquares = []
+  const bigCells = []
   for (let i = 0; i < 9; i += 3) {
     for (let j = 0; j < 9; j += 3) {
       const square = []
@@ -47,11 +47,19 @@ function generatePuzzle() {
           square.push(grid[i + k][j + l])
         }
       }
-      bigSquares.push(square)
+      bigCells.push(square)
     }
   }
 
-  return bigSquares
+  // Create nested arrays for columns and rows
+  const columns: number[][] = []
+  for (let col = 0; col < 9; col++) {
+    columns.push(grid.map((row) => row[col]))
+  }
+
+  const rows = grid
+
+  return { bigCells, columns, rows }
 }
 
 interface PencilMarks {
@@ -69,10 +77,10 @@ interface Small {
 }
 
 export function generateData() {
-  const puzzle = generatePuzzle()
+  const { bigCells } = generatePuzzle()
 
-  let data = puzzle.map((p) => {
-    return p.map((answer, index) => {
+  let data = bigCells.map((big) => {
+    return big.map((answer, index) => {
       const prefilled = Math.random() > 0.45
       const value = prefilled ? answer : ''
       const pencilMarks = Array.from({ length: 9 }).map((_, i) => ({
