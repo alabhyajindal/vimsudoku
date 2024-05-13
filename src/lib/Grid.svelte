@@ -10,29 +10,26 @@
   } from './store'
 
   function navigate(e: KeyboardEvent) {
+    let columnCell = $columns[$activeColumn][$activeRow]
+    let rowCell = $rows[$activeRow][$activeColumn]
+    columnCell.active = false
+    rowCell.active = false
+
     if (e.key == 'j') {
       if ($activeRow + 1 <= 8) {
-        $columns[$activeColumn][$activeRow].active = false
         $activeRow++
-        $columns[$activeColumn][$activeRow].active = true
       }
     } else if (e.key == 'k') {
       if ($activeRow - 1 >= 0) {
-        $columns[$activeColumn][$activeRow].active = false
         $activeRow--
-        $columns[$activeColumn][$activeRow].active = true
       }
     } else if (e.key == 'l') {
       if ($activeColumn + 1 <= 8) {
-        $rows[$activeRow][$activeColumn].active = false
         $activeColumn++
-        $rows[$activeRow][$activeColumn].active = true
       }
     } else if (e.key == 'h') {
       if ($activeColumn - 1 >= 0) {
-        $rows[$activeRow][$activeColumn].active = false
         $activeColumn--
-        $rows[$activeRow][$activeColumn].active = true
       }
     }
   }
