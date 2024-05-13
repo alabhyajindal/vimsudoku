@@ -103,7 +103,7 @@ export function generateData() {
   return data
 }
 
-function generateNew() {
+export function generateNew() {
   let grid = [...Array(9)].map(() => Array(9).fill(0))
 
   function backtrack(row: number, col: number) {
@@ -170,7 +170,9 @@ function generateNew() {
   // console.log({ columns })
   // console.log(bigCells)
 
-  return { bigCells, columns, rows }
+  // return { bigCells, columns, rows }
+  console.log(bigCells)
+  return bigCells
 }
 
 function addCellData(grid: [][]) {
@@ -197,8 +199,8 @@ function addCellData(grid: [][]) {
   return result
 }
 
-const { bigCells } = generateNew()
-const data = generateData()
+// const bigCells = generateNew()
+// const data = generateData()
 
-console.log('new', bigCells)
-console.log('old', data)
+// console.log('new', bigCells)
+// console.log('old', data)
