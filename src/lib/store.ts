@@ -1,5 +1,6 @@
 import { derived, writable } from 'svelte/store'
 import { createData } from './puzzleGenerator'
+import type { Writable } from 'svelte/store'
 
 const data = createData()
 

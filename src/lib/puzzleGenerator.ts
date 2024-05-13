@@ -1,9 +1,9 @@
-interface PencilMarks {
+export interface PencilMarks {
   value: number
   selected: boolean
 }
 
-interface Small {
+export interface Small {
   answer: number
   pencilMarks: PencilMarks[]
   value: '' | number

@@ -1,8 +1,6 @@
 <script lang="ts">
   import BigCell from './BigCell.svelte'
   import {
-    activeBigCell,
-    activeSmallCell,
     bigCells,
     pencilMode,
     columns,
@@ -66,16 +64,12 @@
     }
   }
 
-  // $: $bigCells[$activeBigCell][$activeSmallCell].active = true
-
   $: {
     $columns[$activeColumn][$activeRow].active = true
     $rows[$activeRow][$activeColumn].active = true
     $columns[$activeColumn][$activeRow].value =
       $columns[$activeColumn][$activeRow].value
   }
-
-  $: console.log($bigCells)
 </script>
 
 <div>
