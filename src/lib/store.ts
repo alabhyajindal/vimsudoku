@@ -28,7 +28,7 @@ export const bigCells = derived(rows, ($rows) => {
   return bigCells
 })
 
-export const pencilMode = writable('pencil')
+export const inputMode = writable('pencil')
 
 export const mistakes = writable(0)
 

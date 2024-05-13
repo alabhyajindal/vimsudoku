@@ -1,6 +1,6 @@
 <script lang="ts">
   import { clsx } from 'clsx'
-  import { pencilMode, activeColumn, activeRow, activeBigCell } from './store'
+  import { inputMode, activeColumn, activeRow, activeBigCell } from './store'
 
   export let small
   export let bigCellIndex

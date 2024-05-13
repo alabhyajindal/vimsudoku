@@ -3,7 +3,7 @@
   import type { Small } from './puzzleGenerator'
   import {
     bigCells,
-    pencilMode,
+    inputMode,
     columns,
     activeColumn,
     activeRow,
@@ -50,12 +50,12 @@
 
   function handleKeyDown(e: KeyboardEvent) {
     if (e.key == 'Escape' || (e.ctrlKey && e.key == '[')) {
-      if ($pencilMode == 'pencil') $pencilMode = 'solve'
-      else if ($pencilMode == 'solve') $pencilMode = 'pencil'
-      else if ($pencilMode == 'cmd') $pencilMode = 'pencil'
+      if ($inputMode == 'pencil') $inputMode = 'solve'
+      else if ($inputMode == 'solve') $inputMode = 'pencil'
+      else if ($inputMode == 'cmd') $inputMode = 'pencil'
     } else if (Number(e.key)) {
       if (!$columns[$activeColumn][$activeRow].prefilled) {
-        if ($pencilMode == 'solve') {
+        if ($inputMode == 'solve') {
           $columns[$activeColumn][$activeRow].value = Number(e.key)
           if (
             $columns[$activeColumn][$activeRow].value !==
@@ -70,7 +70,7 @@
             ...v,
             selected: false,
           }))
-        } else if ($pencilMode == 'pencil') {
+        } else if ($inputMode == 'pencil') {
           $columns[$activeColumn][$activeRow].value = ''
           $columns[$activeColumn][$activeRow].pencilMarks[
             Number(e.key) - 1

@@ -1,6 +1,6 @@
 <script lang="ts">
   import Sudoku from './lib/Sudoku.svelte'
-  import { pencilMode, mistakes, activeColumn, activeRow } from './lib/store'
+  import { inputMode, mistakes, activeColumn, activeRow } from './lib/store'
 
   function formattedTime(elapsedSeconds: number) {
     const hours = Math.floor(elapsedSeconds / 3600)
@@ -48,7 +48,7 @@
 
     <div class="vim-bottom">
       <div class="bottom">
-        <p class="mode-indicator">--{$pencilMode}--</p>
+        <p class="mode-indicator">--{$inputMode}--</p>
         <div class="bottom-right">
           <p class="cell-indicator">{$activeRow + 1},{$activeColumn + 1}</p>
           <p class="content-indicator">All</p>
