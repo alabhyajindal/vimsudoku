@@ -8,9 +8,10 @@ export interface Small {
   pencilMarks: PencilMarks[]
   value: '' | number
   active: boolean
-  index: number
   prefilled: boolean
   highlighted: boolean
+  columnIndex: number
+  rowIndex: number
 }
 
 export function createData(): {
@@ -84,8 +85,8 @@ export function createData(): {
 }
 
 function addCellData(grid: number[][]) {
-  const result = grid.map((row, i) => {
-    return row.map((answer, index) => {
+  const result = grid.map((row, rowIndex) => {
+    return row.map((answer, columnIndex) => {
       // const prefilled = Math.random() > 0.45
       const prefilled = Math.random() > 0.01
       const value = prefilled ? answer : ''
@@ -98,8 +99,8 @@ function addCellData(grid: number[][]) {
         answer,
         pencilMarks,
         value,
-        index,
-        index2: i,
+        rowIndex,
+        columnIndex,
         prefilled,
         active: false,
         highlighted: false,

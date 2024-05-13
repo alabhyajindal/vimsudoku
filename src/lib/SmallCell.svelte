@@ -10,7 +10,8 @@
     small: true,
     'small-active': small.active,
     incorrect: small.value !== small.answer,
-    highlighted: small.index == $activeColumn || small.index2 == $activeRow,
+    highlighted:
+      small.columnIndex == $activeColumn || small.rowIndex == $activeRow,
   })}
 >
   <div class="answer">
