@@ -2,6 +2,8 @@
   import { clsx } from 'clsx'
   import { pencilMode } from './store'
   export let small
+
+  $: console.log(small.value)
 </script>
 
 <div class={clsx({ small: true, 'small-active': small.active })}>

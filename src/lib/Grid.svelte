@@ -1,5 +1,4 @@
 <script lang="ts">
-  import App from '../App.svelte'
   import BigCell from './BigCell.svelte'
   import {
     activeBigCell,
@@ -32,7 +31,7 @@
         $rows[$activeRow][$activeColumn].active = true
       }
     } else if (e.key == 'h') {
-      if ($activeColumn - 1 <= 0) {
+      if ($activeColumn - 1 >= 0) {
         $rows[$activeRow][$activeColumn].active = false
         $activeColumn--
         $rows[$activeRow][$activeColumn].active = true
@@ -44,23 +43,22 @@
     if (e.key == 'Escape' || (e.ctrlKey && e.key == '[')) {
       $pencilMode = !$pencilMode
     } else if (Number(e.key)) {
-      if (!$bigCells[$activeBigCell][$activeSmallCell].prefilled) {
+      if (!$columns[$activeColumn][$activeRow].prefilled) {
         if (!$pencilMode) {
-          $bigCells[$activeBigCell][$activeSmallCell].pencilMarks = $bigCells[
-            $activeBigCell
-          ][$activeSmallCell].pencilMarks.map((v) => ({
+          $columns[$activeColumn][$activeRow].value = Number(e.key)
+          $columns[$activeColumn][$activeRow].pencilMarks = $columns[
+            $activeColumn
+          ][$activeRow].pencilMarks.map((v) => ({
             ...v,
             selected: false,
           }))
-          $bigCells[$activeBigCell][$activeSmallCell].value = Number(e.key)
         } else if ($pencilMode) {
-          $bigCells[$activeBigCell][$activeSmallCell].value = ''
-          $bigCells[$activeBigCell][$activeSmallCell].pencilMarks[
+          $columns[$activeColumn][$activeRow].value = ''
+          $columns[$activeColumn][$activeRow].pencilMarks[
             Number(e.key) - 1
           ].selected =
-            !$bigCells[$activeBigCell][$activeSmallCell].pencilMarks[
-              Number(e.key) - 1
-            ].selected
+            !$columns[$activeColumn][$activeRow].pencilMarks[Number(e.key) - 1]
+              .selected
         }
       }
     } else {
@@ -70,8 +68,12 @@
 
   // $: $bigCells[$activeBigCell][$activeSmallCell].active = true
 
-  $: $columns[$activeColumn][$activeRow].active = true
-  $: $rows[$activeRow][$activeColumn].active = true
+  $: {
+    $columns[$activeColumn][$activeRow].active = true
+    $rows[$activeRow][$activeColumn].active = true
+    $columns[$activeColumn][$activeRow].value =
+      $columns[$activeColumn][$activeRow].value
+  }
 
   $: console.log($bigCells)
 </script>

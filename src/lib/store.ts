@@ -13,7 +13,7 @@ export const activeColumn = writable(0)
 // export const rows = writable(data.rows)
 export const activeRow = writable(0)
 
-export const pencilMode = writable(true)
+export const pencilMode = writable(false)
 
 const newData = createData()
 
