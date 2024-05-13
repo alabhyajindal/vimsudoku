@@ -142,9 +142,7 @@ function generateNew() {
 
   backtrack(0, 0)
 
-  console.log(grid)
   grid = addCellData(grid)
-  console.log(grid)
 
   // Create the big squares
   const bigCells = []
@@ -167,6 +165,10 @@ function generateNew() {
   }
 
   const rows = grid
+
+  // console.log({ rows })
+  // console.log({ columns })
+  // console.log(bigCells)
 
   return { bigCells, columns, rows }
 }
@@ -195,4 +197,8 @@ function addCellData(grid: [][]) {
   return result
 }
 
-generateNew()
+const { bigCells } = generateNew()
+const data = generateData()
+
+console.log('new', bigCells)
+console.log('old', data)
