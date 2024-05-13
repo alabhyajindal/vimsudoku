@@ -1,8 +1,7 @@
 import { derived, writable } from 'svelte/store'
-import { generateData, generateNew } from './puzzleGenerator'
+import { createData } from './puzzleGenerator'
 
-// export const bigCells = writable(generateData())
-export const bigCells = writable(generateNew())
+export const bigCells = writable(createData().bigCells)
 export const activeBigCell = writable(0)
 export const activeSmallCell = writable(0)
 export const pencilMode = writable(true)
