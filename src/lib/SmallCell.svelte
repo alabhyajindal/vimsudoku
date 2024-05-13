@@ -1,12 +1,13 @@
 <script lang="ts">
+  import { clsx } from 'clsx'
   export let small
 </script>
 
-<div class={small.active ? 'small small-active' : 'small'}>
+<div class={clsx({ small: true, 'small-active': small.active })}>
   <div class="answer">{small.value}</div>
   <div class="pencil-marks">
     {#each small.pencilMarks as mark}
-      <div class={mark.selected ? 'pencil-mark' : 'pencil-mark hidden'}>
+      <div class={clsx({ 'pencil-mark': true, hidden: !mark.selected })}>
         {mark.value}
       </div>
     {/each}
