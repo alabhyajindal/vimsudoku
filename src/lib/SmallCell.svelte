@@ -1,7 +1,10 @@
 <script lang="ts">
   import { clsx } from 'clsx'
-  import { pencilMode } from './store'
+  import { pencilMode, activeColumn } from './store'
+
   export let small
+
+  $: console.log(small)
 </script>
 
 <div
@@ -9,7 +12,7 @@
     small: true,
     'small-active': small.active,
     incorrect: small.value !== small.answer,
-    highlighted: small.highlighted,
+    highlighted: small.index == $activeColumn,
   })}
 >
   <div class={clsx({ answer: true })}>
@@ -41,7 +44,7 @@
   }
 
   .small-active {
-    background-color: var(--light-blue);
+    background-color: var(--light-blue) !important;
   }
 
   .answer {
@@ -80,6 +83,6 @@
   }
 
   .highlighted {
-    background-color: pink;
+    background-color: var(--highlighted-bg);
   }
 </style>
