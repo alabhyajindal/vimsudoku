@@ -20,13 +20,11 @@
         $columns[$activeColumn][$activeRow].active = true
       }
     } else if (e.key == 'k') {
-      if ($activeBigCell == 0 && $activeSmallCell <= 2) return
-      $bigCells[$activeBigCell][$activeSmallCell].active = false
-
-      if ($activeSmallCell <= 2) {
-        $activeBigCell -= 3
-        $activeSmallCell += 6
-      } else $activeSmallCell -= 3
+      if ($activeRow - 1 >= 0) {
+        $columns[$activeColumn][$activeRow].active = false
+        $activeRow--
+        $columns[$activeColumn][$activeRow].active = true
+      }
     } else if (e.key == 'l') {
       if ($activeColumn + 1 <= 8) {
         $rows[$activeRow][$activeColumn].active = false
@@ -34,23 +32,11 @@
         $rows[$activeRow][$activeColumn].active = true
       }
     } else if (e.key == 'h') {
-      if (
-        ($activeBigCell == 0 || $activeBigCell == 3 || $activeBigCell == 6) &&
-        ($activeSmallCell == 0 ||
-          $activeSmallCell == 3 ||
-          $activeSmallCell == 6)
-      )
-        return
-      $bigCells[$activeBigCell][$activeSmallCell].active = false
-
-      if (
-        $activeSmallCell == 0 ||
-        $activeSmallCell == 3 ||
-        $activeSmallCell == 6
-      ) {
-        $activeBigCell--
-        $activeSmallCell += 2
-      } else $activeSmallCell--
+      if ($activeColumn - 1 <= 0) {
+        $rows[$activeRow][$activeColumn].active = false
+        $activeColumn--
+        $rows[$activeRow][$activeColumn].active = true
+      }
     }
   }
 
