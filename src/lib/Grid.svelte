@@ -15,20 +15,10 @@
   function navigate(e: KeyboardEvent) {
     if (e.key == 'j') {
       if ($activeRow + 1 <= 8) {
-        console.log('here')
-        console.log($columns[$activeColumn][$activeRow])
         $columns[$activeColumn][$activeRow].active = false
         $activeRow++
         $columns[$activeColumn][$activeRow].active = true
       }
-      return
-
-      if ($activeBigCell >= 6 && $activeSmallCell >= 6) return
-      $bigCells[$activeBigCell][$activeSmallCell].active = false
-      if ($activeSmallCell >= 6) {
-        $activeBigCell += 3
-        $activeSmallCell -= 6
-      } else $activeSmallCell += 3
     } else if (e.key == 'k') {
       if ($activeBigCell == 0 && $activeSmallCell <= 2) return
       $bigCells[$activeBigCell][$activeSmallCell].active = false
@@ -38,29 +28,11 @@
         $activeSmallCell += 6
       } else $activeSmallCell -= 3
     } else if (e.key == 'l') {
-      $rows[$activeRow][$activeColumn].active = false
-      $activeColumn++
-      $rows[$activeRow][$activeColumn].active = true
-
-      return
-
-      if (
-        ($activeBigCell == 2 || $activeBigCell == 5 || $activeBigCell == 8) &&
-        ($activeSmallCell == 2 ||
-          $activeSmallCell == 5 ||
-          $activeSmallCell == 8)
-      )
-        return
-      $bigCells[$activeBigCell][$activeSmallCell].active = false
-
-      if (
-        $activeSmallCell == 2 ||
-        $activeSmallCell == 5 ||
-        $activeSmallCell == 8
-      ) {
-        $activeBigCell++
-        $activeSmallCell -= 2
-      } else $activeSmallCell++
+      if ($activeColumn + 1 <= 8) {
+        $rows[$activeRow][$activeColumn].active = false
+        $activeColumn++
+        $rows[$activeRow][$activeColumn].active = true
+      }
     } else if (e.key == 'h') {
       if (
         ($activeBigCell == 0 || $activeBigCell == 3 || $activeBigCell == 6) &&
@@ -112,7 +84,8 @@
 
   // $: $bigCells[$activeBigCell][$activeSmallCell].active = true
 
-  // $: $columns[$activeColumn][$activeRow].active = true
+  $: $columns[$activeColumn][$activeRow].active = true
+  $: $rows[$activeRow][$activeColumn].active = true
 
   $: console.log($bigCells)
 </script>
