@@ -28,8 +28,8 @@
     --bright-blue: #325aaf;
     --incorrect-red: #e55c6c;
     --title-black: #0f172a;
-    --highlighted-bg: #d0d8df;
-    --timer-gray: #94a3b7;
+    --highlighted-bg: #dee2e6;
+    --pencil-blue: #2f4157;
   }
 
   main {

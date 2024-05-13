@@ -33,6 +33,17 @@
       if ($activeColumn - 1 >= 0) {
         $activeColumn--
       }
+    } else if (e.key == 'x') {
+      if (!$columns[$activeColumn][$activeRow].prefilled) {
+        $columns[$activeColumn][$activeRow].value = ''
+
+        $columns[$activeColumn][$activeRow].pencilMarks = $columns[
+          $activeColumn
+        ][$activeRow].pencilMarks.map((v) => ({
+          ...v,
+          selected: false,
+        }))
+      }
     }
   }
 
@@ -43,6 +54,7 @@
       if (!$columns[$activeColumn][$activeRow].prefilled) {
         if (!$pencilMode) {
           $columns[$activeColumn][$activeRow].value = Number(e.key)
+
           $columns[$activeColumn][$activeRow].pencilMarks = $columns[
             $activeColumn
           ][$activeRow].pencilMarks.map((v) => ({

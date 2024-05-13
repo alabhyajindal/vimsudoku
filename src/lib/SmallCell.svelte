@@ -72,7 +72,7 @@
     font-size: 0.8em;
     z-index: 2;
     font-weight: 600;
-    color: var(--dark-blue);
+    color: var(--pencil-blue);
   }
 
   .pencil-mark {
