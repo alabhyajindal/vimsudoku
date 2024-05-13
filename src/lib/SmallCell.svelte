@@ -5,7 +5,9 @@
 </script>
 
 <div class={clsx({ small: true, 'small-active': small.active })}>
-  <div class="answer">{small.value}</div>
+  <div class={clsx({ answer: true, incorrect: small.value !== small.answer })}>
+    {small.value}
+  </div>
   <div
     class={clsx({
       'pencil-marks': true,
@@ -64,5 +66,9 @@
 
   .hidden {
     visibility: hidden;
+  }
+
+  .incorrect {
+    color: var(--incorrect-red);
   }
 </style>

@@ -1,5 +1,6 @@
 <script lang="ts">
   import BigCell from './BigCell.svelte'
+  import type { Small } from './puzzleGenerator'
   import {
     bigCells,
     pencilMode,
@@ -60,6 +61,19 @@
       navigate(e)
     }
   }
+
+  function checkCompletion(columns: Small[][]) {
+    let count = 0
+    columns.forEach((column) => {
+      column.forEach((cell) => {
+        if (cell.answer == cell.value) count++
+      })
+    })
+    if (count == 81) return true
+    return false
+  }
+
+  $: if (checkCompletion($columns)) console.log('puzzle done')
 
   $: {
     $columns[$activeColumn][$activeRow].active = true
