@@ -1,6 +1,6 @@
 <script lang="ts">
   import BigCell from './BigCell.svelte'
-  import type { Small } from './puzzleGenerator'
+  import type { Small } from './helpers'
   import {
     bigCells,
     inputMode,
@@ -10,6 +10,7 @@
     rows,
     activeBigCell,
     mistakes,
+    displayTime,
   } from './store'
 
   function navigate(e: KeyboardEvent) {
@@ -91,11 +92,18 @@
         if (cell.answer == cell.value) count++
       })
     })
-    if (count == 81) return true
+    if (count == 81) {
+      alert(`Congratulations! You completed the game in ${$displayTime}`)
+    }
     return false
   }
 
-  // $: if (checkCompletion($columns)) console.log('puzzle done')
+  function checkMistakes(mistakes: number) {
+    if (mistakes == 5) {
+      alert('Game over. Press <CR> to start a new game.')
+      window.location.reload()
+    }
+  }
 
   function getActiveBigCell(activeColumn: number, activeRow: number) {
     const bigCellRow = Math.floor(activeRow / 3)
@@ -111,6 +119,9 @@
       $columns[$activeColumn][$activeRow].value
 
     $activeBigCell = getActiveBigCell($activeColumn, $activeRow)
+
+    checkCompletion($columns)
+    checkMistakes($mistakes)
   }
 </script>
 

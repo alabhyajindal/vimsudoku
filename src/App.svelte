@@ -1,26 +1,16 @@
 <script lang="ts">
   import Sudoku from './lib/Sudoku.svelte'
-  import { inputMode, mistakes, activeColumn, activeRow } from './lib/store'
+  import {
+    inputMode,
+    mistakes,
+    activeColumn,
+    activeRow,
+    elapsedTime,
+    displayTime,
+  } from './lib/store'
 
-  function formattedTime(elapsedSeconds: number) {
-    const hours = Math.floor(elapsedSeconds / 3600)
-    const remainingSeconds = elapsedSeconds % 3600
-
-    const minutes = Math.floor(remainingSeconds / 60)
-    const seconds = remainingSeconds % 60
-
-    let formattedTime = ''
-
-    if (hours) formattedTime += `${hours}h `
-    if (minutes) formattedTime += `${minutes}m `
-    formattedTime += `${seconds}s`
-
-    return formattedTime.trim()
-  }
-
-  let elapsedTime = 0
   setInterval(() => {
-    elapsedTime += 1
+    $elapsedTime += 1
   }, 1000)
 </script>
 
@@ -51,7 +41,7 @@
           <span class="label">Mistakes: </span>{$mistakes}/5
         </p>
         <p class="time">
-          {formattedTime(elapsedTime)}
+          {$displayTime}
         </p>
       </div>
     </div>

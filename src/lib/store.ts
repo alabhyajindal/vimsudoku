@@ -1,5 +1,5 @@
 import { derived, writable } from 'svelte/store'
-import { createData, type Small } from './puzzleGenerator'
+import { createData, formatTime, type Small } from './helpers'
 
 export const activeBigCell = writable(0)
 export const activeSmallCell = writable(0)
@@ -33,3 +33,9 @@ export const inputMode = writable('pencil')
 export const mistakes = writable(0)
 
 export const command = writable('')
+
+export const elapsedTime = writable(0)
+
+export const displayTime = derived(elapsedTime, ($elapsedTime) =>
+  formatTime($elapsedTime)
+)

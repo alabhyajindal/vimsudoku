@@ -110,3 +110,19 @@ function addCellData(grid: number[][]) {
   })
   return result
 }
+
+export function formatTime(elapsedSeconds: number) {
+  const hours = Math.floor(elapsedSeconds / 3600)
+  const remainingSeconds = elapsedSeconds % 3600
+
+  const minutes = Math.floor(remainingSeconds / 60)
+  const seconds = remainingSeconds % 60
+
+  let formattedTime = ''
+
+  if (hours) formattedTime += `${hours}h `
+  if (minutes) formattedTime += `${minutes}m `
+  formattedTime += `${seconds}s`
+
+  return formattedTime.trim()
+}
