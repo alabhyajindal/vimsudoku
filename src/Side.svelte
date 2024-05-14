@@ -2,7 +2,7 @@
   <div class="intro">
     <div class="guide">
       <p>
-        <code>j, h, k, l</code> to navigate
+        <code>j, h, k, l, H, L, M</code> to navigate
       </p>
       <p>
         <code>&lt;C-&lsqb;&gt;</code>,

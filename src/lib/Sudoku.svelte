@@ -13,7 +13,7 @@
     displayTime,
   } from './store'
 
-  function navigate(e: KeyboardEvent) {
+  function processCommands(e: KeyboardEvent) {
     let columnCell = $columns[$activeColumn][$activeRow]
     let rowCell = $rows[$activeRow][$activeColumn]
     columnCell.active = false
@@ -46,6 +46,12 @@
           selected: false,
         }))
       }
+    } else if (e.key == 'L') {
+      $activeRow = 8
+    } else if (e.key == 'H') {
+      $activeRow = 0
+    } else if (e.key == 'M') {
+      $activeRow = 4
     }
   }
 
@@ -81,7 +87,7 @@
         }
       }
     } else {
-      navigate(e)
+      processCommands(e)
     }
   }
 
