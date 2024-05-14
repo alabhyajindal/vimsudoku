@@ -86,23 +86,29 @@
   }
 
   function checkCompletion(columns: Small[][]) {
-    let count = 0
-    columns.forEach((column) => {
-      column.forEach((cell) => {
-        if (cell.answer == cell.value) count++
+    setTimeout(() => {
+      let count = 0
+      columns.forEach((column) => {
+        column.forEach((cell) => {
+          if (cell.answer == cell.value) count++
+        })
       })
-    })
-    if (count == 81) {
-      alert(`Congratulations! You completed the game in ${$displayTime}`)
-    }
-    return false
+      if (count == 81) {
+        alert(
+          `Congratulations! You completed the game in ${$displayTime}. Amazing!`
+        )
+      }
+      return false
+    }, 1)
   }
 
   function checkMistakes(mistakes: number) {
-    if (mistakes == 5) {
-      alert('Game over. Press <CR> to start a new game.')
-      window.location.reload()
-    }
+    setTimeout(() => {
+      if (mistakes == 5) {
+        alert('Game over. Press <CR> to start a new game.')
+        window.location.reload()
+      }
+    }, 1)
   }
 
   function getActiveBigCell(activeColumn: number, activeRow: number) {
