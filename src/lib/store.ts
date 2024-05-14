@@ -1,5 +1,10 @@
 import { derived, writable } from 'svelte/store'
-import { createData, formatTime, type Small } from './helpers'
+import {
+  createData,
+  createNumberIndicators,
+  formatTime,
+  type Small,
+} from './helpers'
 
 export const activeBigCell = writable(0)
 export const activeSmallCell = writable(0)
@@ -38,4 +43,8 @@ export const elapsedTime = writable(0)
 
 export const displayTime = derived(elapsedTime, ($elapsedTime) =>
   formatTime($elapsedTime)
+)
+
+export const numberIndicators = derived(columns, ($columns) =>
+  createNumberIndicators($columns)
 )

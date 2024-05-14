@@ -1,5 +1,7 @@
 <script lang="ts">
+  import clsx from 'clsx'
   import Sudoku from './lib/Sudoku.svelte'
+  import type { Small } from './lib/helpers'
   import {
     inputMode,
     mistakes,
@@ -7,6 +9,7 @@
     activeRow,
     elapsedTime,
     displayTime,
+    numberIndicators,
   } from './lib/store'
 
   setInterval(() => {
@@ -50,10 +53,14 @@
 
     <div class="bottom">
       <p class="mode-indicator">--{$inputMode}--</p>
-      <div class="bottom-right">
-        <p class="cell-indicator">{$activeRow + 1},{$activeColumn + 1}</p>
-        <p class="content-indicator">All</p>
+      <div class="number-indicators">
+        {#each $numberIndicators as number}
+          <p class={clsx({ completed: number.completed })}>
+            {number.value}
+          </p>
+        {/each}
       </div>
+      <p class="cell-indicator">{$activeRow + 1},{$activeColumn + 1}</p>
     </div>
   </main>
 </section>
@@ -194,6 +201,10 @@
     margin-bottom: 0.4em;
   }
 
+  .completed {
+    background-color: var(--bright-blue);
+  }
+
   a {
     text-decoration: none;
   }
@@ -210,16 +221,15 @@
     color: var(--bright-blue);
 
     margin-block: 1em;
-    padding-bottom: 1em;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
 
-  .bottom-right {
+  .number-indicators {
     display: flex;
-    gap: 4em;
+    gap: 1.8em;
   }
 
   .mode-indicator {

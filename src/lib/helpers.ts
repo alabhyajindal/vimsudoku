@@ -87,8 +87,8 @@ export function createData(): {
 function addCellData(grid: number[][]) {
   const result = grid.map((row, rowIndex) => {
     return row.map((answer, columnIndex) => {
-      // const prefilled = Math.random() > 0.45
-      const prefilled = Math.random() > 0.01
+      const prefilled = Math.random() > 0.45
+      // const prefilled = Math.random() > 0.01
       const value = prefilled ? answer : ''
       const pencilMarks = Array.from({ length: 9 }).map((_, i) => ({
         value: i + 1,
@@ -125,4 +125,28 @@ export function formatTime(elapsedSeconds: number) {
   formattedTime += `${seconds}s`
 
   return formattedTime.trim()
+}
+
+export function createNumberIndicators(columns: Small[][]) {
+  let result: { value: number; count: number; completed: boolean }[] = []
+
+  columns.forEach((column) => {
+    column.forEach((cell) => {
+      if (typeof result[cell.answer - 1] !== 'object') {
+        result[cell.answer - 1] = {
+          value: cell.answer,
+          count: 0,
+          completed: false,
+        }
+      }
+      if (cell.answer == cell.value) {
+        result[cell.answer - 1].count++
+        if (result[cell.answer - 1].count == 9) {
+          result[cell.answer - 1].completed = true
+        }
+      }
+    })
+  })
+
+  return result
 }
