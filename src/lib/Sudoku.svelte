@@ -110,7 +110,7 @@
 
   function checkMistakes(mistakes: number) {
     setTimeout(() => {
-      if (mistakes == 5) {
+      if (mistakes == 3) {
         alert('Game over. Press <CR> to start a new game.')
         window.location.reload()
       }

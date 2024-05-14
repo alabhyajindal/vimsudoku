@@ -12,24 +12,24 @@
   } from './lib/store'
   import Footer from './lib/Footer.svelte'
   import { onMount } from 'svelte'
-  import LeftSide from './LeftSide.svelte'
+  import Instructions from './lib/Instructions.svelte'
   import Haiku from './lib/Haiku.svelte'
 
   setInterval(() => {
     $elapsedTime += 1
   }, 1000)
 
-  // onMount(() => {
-  //   if (window.innerWidth < 1200) {
-  //     alert(
-  //       `Vim Sudoku looks best on screens wider than 1200 pixels. It may not look good on your screen which is ${window.innerWidth} pixels wide. Sorry!`
-  //     )
-  //   }
-  // })
+  onMount(() => {
+    if (window.innerWidth < 1200) {
+      alert(
+        `Vim Sudoku looks best on screens wider than 1200 pixels. It may not look good on your screen which is ${window.innerWidth} pixels wide. Sorry!`
+      )
+    }
+  })
 </script>
 
 <section>
-  <LeftSide />
+  <Instructions />
 
   <main>
     <div class="top">
@@ -38,7 +38,7 @@
       </div>
       <div class="top-right">
         <p class="mistakes">
-          <span class="label">mistakes: </span>{$mistakes}/5
+          <span class="label">mistakes: </span>{$mistakes}/3
         </p>
         <p class="time">
           {$displayTime}

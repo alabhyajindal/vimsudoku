@@ -15,7 +15,7 @@
       </li>
       <li>
         <a href="https://forms.gle/uvTWNFR6nzc8gC1A7" target="_blank"
-          >send feedback</a
+          >share feedback</a
         >
       </li>
     </ul>
