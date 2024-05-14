@@ -74,7 +74,6 @@
 
   :global(body) {
     background-color: var(--background-blue);
-    margin-top: 2em;
     max-height: 100vh;
     color: var(--dark-blue);
   }
@@ -101,6 +100,7 @@
     font-weight: 450;
     font-size: 1em;
     align-self: stretch;
+    margin-block: 1em;
   }
 
   :global(a) {
@@ -114,14 +114,18 @@
   section {
     margin-inline: 4em;
     display: flex;
+    justify-content: space-around;
+    /* background-color: lightcoral; */
+    height: 100vh;
   }
 
   main {
-    flex: 0 1;
+    margin-top: 2em;
+    flex-shrink: 0;
+    /* background-color: coral; */
     min-width: 600px;
     max-width: 35%;
     padding-inline: 0.4em;
-    margin-inline: auto;
   }
 
   .top {
