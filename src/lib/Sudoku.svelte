@@ -52,6 +52,10 @@
       $activeRow = 0
     } else if (e.key == 'M') {
       $activeRow = 4
+    } else if (e.key == '0') {
+      $activeColumn = 0
+    } else if (e.key == '$') {
+      $activeColumn = 8
     }
   }
 
@@ -60,7 +64,7 @@
       if ($inputMode == 'pencil') $inputMode = 'solve'
       else if ($inputMode == 'solve') $inputMode = 'pencil'
       else if ($inputMode == 'cmd') $inputMode = 'pencil'
-    } else if (Number(e.key)) {
+    } else if (Number(e.key) && e.key !== '0') {
       if (!$columns[$activeColumn][$activeRow].prefilled) {
         if ($inputMode == 'solve') {
           $columns[$activeColumn][$activeRow].value = Number(e.key)

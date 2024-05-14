@@ -4,7 +4,8 @@
       <p>navigate</p>
       <p>
         <code>j</code> <code>h</code> <code>k</code> <code>l</code>
-        <code>H</code> <code>L</code> <code>M</code>
+        <code>H</code> <code>L</code> <code>M</code> <code>0</code>
+        <code>$</code>
       </p>
     </div>
     <div class="block">
@@ -30,7 +31,6 @@
     background-color: var(--dark-blue);
     color: white;
     padding: 2px 4px;
-    font-weight: 500;
     max-width: fit-content;
   }
 

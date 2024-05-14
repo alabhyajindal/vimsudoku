@@ -102,6 +102,7 @@
     margin-top: 2em;
     font-weight: 450;
     min-height: 12em;
+    font-size: 1.1em;
   }
 
   section {
