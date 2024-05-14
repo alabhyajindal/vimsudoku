@@ -66,36 +66,34 @@
       </div>
     </div>
   </main>
-
-  <div class="side right">
-    <div class="right-inner">
-      <div class="links">
-        <ul>
-          <li>
-            <a
-              href="https://superuser.com/questions/246487/how-to-use-vimtutor"
-              target="_blank">Learn Vim</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://youtu.be/8zRXDsGydeQ?si=BQnRRL4y0SwHzsTe"
-              target="_blank">Learn Sudoku</a
-            >
-          </li>
-          <li>
-            <a href="https://forms.gle/uvTWNFR6nzc8gC1A7" target="_blank"
-              >Send feedback</a
-            >
-          </li>
-        </ul>
-      </div>
-      <p class="sign">
-        <a href="http://alabhyajindal.com" target="_blank">Alabhya Jindal</a>
-      </p>
-    </div>
-  </div>
 </section>
+
+<footer>
+  <div>
+    <ul>
+      <li>
+        <a
+          href="https://superuser.com/questions/246487/how-to-use-vimtutor"
+          target="_blank">Learn Vim</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://youtu.be/8zRXDsGydeQ?si=BQnRRL4y0SwHzsTe"
+          target="_blank">Learn Sudoku</a
+        >
+      </li>
+      <li>
+        <a href="https://forms.gle/uvTWNFR6nzc8gC1A7" target="_blank"
+          >Send feedback</a
+        >
+      </li>
+    </ul>
+    <p class="sign">
+      <a href="http://alabhyajindal.com" target="_blank">Alabhya Jindal</a>
+    </p>
+  </div>
+</footer>
 
 <style>
   :global(*) {
@@ -107,23 +105,24 @@
   :global(body) {
     background-color: var(--background-blue);
     padding-top: 3em;
-    padding-inline: 2em;
+    height: 100vh;
   }
 
   :global(:root) {
     --background-blue: #d6ebfd;
-    --light-blue: #bbdefb;
+    --light-blue: #a6d4fa;
     --dark-blue: #344861;
     --bright-blue: #325aaf;
     --incorrect-red: #e55c6c;
     --title-black: #0f172a;
-    --highlighted-bg: #dee2e6;
     --pencil-blue: #2f4157;
     --label-blue: #717f90;
+    --highlighted-bg: #d6deef;
+    --number-bg: #c2cee7;
   }
 
   section {
-    display: flex;
+    margin-inline: 2em;
   }
 
   ::selection {
@@ -132,47 +131,41 @@
   }
 
   main {
-    flex: 0 0 500px;
-    max-width: 500px;
+    flex: 0 1;
+    max-width: 35%;
     margin-inline: auto;
     flex-grow: 1;
   }
 
   .side {
-    flex: 0 1;
-    min-width: 400px;
+    position: fixed;
   }
 
-  .links {
-    margin-bottom: 5em;
-  }
-
-  .right {
-    position: relative;
-  }
-
-  .links a {
+  a {
     color: var(--dark-blue);
   }
 
-  .links {
-    color: var(--dark-blue);
-    position: absolute;
-    right: 0;
-    color: var(--bright-blue);
+  footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 1em;
+    font-weight: 500;
+  }
+
+  footer div:first-child {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  footer ul {
+    display: flex;
+    list-style-type: none;
+    gap: 1em;
   }
 
   .sign a {
     color: var(--bright-blue);
-  }
-
-  .sign {
-    position: absolute;
-    bottom: 0;
-    font-weight: 500;
-
-    right: 0;
-    margin-bottom: 2em;
   }
 
   .top {
@@ -232,8 +225,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    /* border-bottom: 1.6px solid var(--bright-blue); */
   }
 
   .bottom-right {
@@ -246,7 +237,6 @@
   }
 
   .side {
-    font-size: 1.1em;
     color: var(--dark-blue);
     margin-top: 3em;
     font-weight: 450;
@@ -264,6 +254,6 @@
     font-size: 1em;
     display: flex;
     flex-direction: column;
-    gap: 0.6em;
+    gap: 1em;
   }
 </style>

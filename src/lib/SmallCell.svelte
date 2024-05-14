@@ -1,6 +1,12 @@
 <script lang="ts">
   import { clsx } from 'clsx'
-  import { inputMode, activeColumn, activeRow, activeBigCell } from './store'
+  import {
+    inputMode,
+    activeColumn,
+    activeRow,
+    activeBigCell,
+    columns,
+  } from './store'
 
   export let small
   export let bigCellIndex
@@ -11,6 +17,9 @@
     small: true,
     'small-active': small.active,
     incorrect: small.value !== small.answer && small.answer !== '',
+    'selected-number':
+      small.value !== '' &&
+      small.value == $columns[$activeColumn][$activeRow].value,
     highlighted:
       small.columnIndex == $activeColumn ||
       small.rowIndex == $activeRow ||
@@ -92,5 +101,9 @@
 
   .highlighted {
     background-color: var(--highlighted-bg);
+  }
+
+  .selected-number {
+    background-color: var(--number-bg);
   }
 </style>
