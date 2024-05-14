@@ -1,15 +1,17 @@
 <script lang="ts">
-  import clsx from 'clsx'
+  import { slide } from 'svelte/transition'
   import { puzzleCompleted, displayTime } from './store'
 </script>
 
 <aside>
   <div>
     {#if $puzzleCompleted}
-      <div class="done">
+      <div in:slide={{ duration: 1200 }} class="done">
         <p class="cong">congratulations!</p>
         <p>you completed the puzzle in {$displayTime}</p>
-        <p>press <code>y</code> if you want to play again</p>
+        <p>amazing!</p>
+        <p class="next">press <code>y</code> to play again</p>
+        <p>press <code>q</code> to exit</p>
         <p></p>
       </div>
     {:else}
@@ -40,19 +42,18 @@
     line-height: 1.4;
   }
 
-  a {
-    color: var(--bright-blue);
-  }
-
   .done {
     display: flex;
     flex-direction: column;
     gap: 0.4em;
-    font-weight: 500;
   }
 
   .cong {
     font-weight: 600;
     font-size: 1.2em;
+  }
+
+  .next {
+    margin-top: 2em;
   }
 </style>

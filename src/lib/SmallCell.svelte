@@ -1,11 +1,11 @@
 <script lang="ts">
   import { clsx } from 'clsx'
   import {
-    inputMode,
     activeColumn,
     activeRow,
     activeBigCell,
     columns,
+    puzzleCompleted,
   } from './store'
 
   export let small
@@ -29,6 +29,7 @@
 >
   <div
     class={clsx({
+      // animate: $puzzleCompleted,
       answer: true,
     })}
   >
@@ -102,4 +103,26 @@
   .selected-number {
     background-color: var(--number-bg);
   }
+
+  /* @keyframes scale {
+    0% {
+      transform: scale(1);
+    }
+    25% {
+      transform: scale(1.1);
+    }
+    50% {
+      transform: scale(1.15);
+    }
+    75% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .animate {
+    animation: scale 0.6s infinite;
+  } */
 </style>

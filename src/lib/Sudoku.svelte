@@ -1,6 +1,6 @@
 <script lang="ts">
+  import clsx from 'clsx'
   import BigCell from './BigCell.svelte'
-  import type { Small } from './helpers'
   import {
     bigCells,
     inputMode,
@@ -10,7 +10,7 @@
     rows,
     activeBigCell,
     mistakes,
-    displayTime,
+    puzzleCompleted,
   } from './store'
 
   function processCommands(e: KeyboardEvent) {
@@ -60,6 +60,16 @@
   }
 
   function handleKeyDown(e: KeyboardEvent) {
+    if ($puzzleCompleted) {
+      if (e.key == 'y') {
+        window.location.reload()
+      } else if (e.key == 'q') {
+        window.close()
+      } else {
+        return
+      }
+    }
+
     if (e.key == 'Escape' || (e.ctrlKey && e.key == '[')) {
       if ($inputMode == 'pencil') $inputMode = 'solve'
       else if ($inputMode == 'solve') $inputMode = 'pencil'
@@ -123,7 +133,7 @@
   }
 </script>
 
-<div>
+<div class={clsx({ animate: $puzzleCompleted })}>
   {#each $bigCells as big, i}
     <BigCell {big} bigCellIndex={i} />
   {/each}
@@ -137,5 +147,21 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     border: 1px solid var(--dark-blue);
+  }
+
+  @keyframes bounce {
+    0% {
+      transform: translateY(0%);
+    }
+    50% {
+      transform: translateY(-0.8%);
+    }
+    100% {
+      transform: translateY(0%);
+    }
+  }
+
+  .animate {
+    animation: bounce 1s infinite;
   }
 </style>
