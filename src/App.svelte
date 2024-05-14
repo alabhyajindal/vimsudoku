@@ -12,28 +12,24 @@
     numberIndicators,
   } from './lib/store'
   import Footer from './lib/Footer.svelte'
+  import { onMount } from 'svelte'
+  import Side from './Side.svelte'
 
   setInterval(() => {
     $elapsedTime += 1
   }, 1000)
+
+  // onMount(() => {
+  //   if (window.innerWidth < 1200) {
+  //     alert(
+  //       `Vim Sudoku looks best on screens wider than 1200 pixels. It may not look good on your screen which is ${window.innerWidth} pixels wide. Sorry!`
+  //     )
+  //   }
+  // })
 </script>
 
 <section>
-  <div class="side left">
-    <div class="intro">
-      <div class="guide">
-        <p>
-          <code>j, h, k, l</code> to navigate
-        </p>
-        <p>
-          <code>&lt;C-&lsqb;&gt;</code>,
-          <code>&lt;Esc&gt;</code> to switch modes
-        </p>
-        <p><code>1-9</code> to add values</p>
-        <p><code>x</code> to erase</p>
-      </div>
-    </div>
-  </div>
+  <Side />
 
   <main>
     <div class="top">
@@ -77,8 +73,8 @@
 
   :global(body) {
     background-color: var(--background-blue);
-    padding-top: 3em;
-    height: 100vh;
+    margin-top: 2em;
+    max-height: 100vh;
   }
 
   :global(:root) {
@@ -95,7 +91,7 @@
   }
 
   section {
-    margin-inline: 2em;
+    margin-inline: 1em;
   }
 
   :global(::selection) {
@@ -105,13 +101,10 @@
 
   main {
     flex: 0 1;
+    min-width: 500px;
     max-width: 35%;
     margin-inline: auto;
     flex-grow: 1;
-  }
-
-  .side {
-    position: fixed;
   }
 
   .top {
@@ -156,7 +149,7 @@
 
     color: var(--bright-blue);
 
-    margin-block: 1em;
+    margin-top: 1.6em;
 
     display: flex;
     align-items: center;
@@ -170,26 +163,6 @@
 
   .mode-indicator {
     text-transform: uppercase;
-  }
-
-  .side {
-    color: var(--dark-blue);
-    margin-top: 3em;
-    font-weight: 450;
-  }
-
-  code {
-    background-color: var(--dark-blue);
-    color: white;
-    padding: 2px 4px;
-    margin-inline: 4px;
-    font-weight: 600;
-  }
-
-  .guide {
-    font-size: 1em;
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
+    width: 7em;
   }
 </style>
