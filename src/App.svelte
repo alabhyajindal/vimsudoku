@@ -60,9 +60,9 @@
       <p class="cell-indicator">{$activeRow + 1},{$activeColumn + 1}</p>
     </div>
   </main>
-</section>
 
-<Haiku />
+  <Haiku />
+</section>
 
 <Footer />
 
@@ -93,21 +93,30 @@
     --number-bg: #c2cee7;
   }
 
-  section {
-    margin-inline: 1em;
-  }
-
   :global(::selection) {
     background-color: var(--bright-blue);
     color: white;
+  }
+
+  section {
+    margin-inline: 1em;
+    display: flex;
+    align-items: start;
   }
 
   main {
     flex: 0 1;
     min-width: 500px;
     max-width: 35%;
+    padding-inline: 0.4em;
     margin-inline: auto;
     flex-grow: 1;
+  }
+
+  :global(aside) {
+    margin-top: 2em;
+    font-weight: 500;
+    min-height: 12em;
   }
 
   .top {

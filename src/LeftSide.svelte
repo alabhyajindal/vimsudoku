@@ -13,12 +13,6 @@
 </aside>
 
 <style>
-  aside {
-    position: fixed;
-    margin-top: 3em;
-    font-weight: 450;
-  }
-
   code {
     background-color: var(--dark-blue);
     color: white;
