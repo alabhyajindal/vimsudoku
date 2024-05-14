@@ -83,15 +83,16 @@
 
   :global(:root) {
     --background-blue: #d6ebfd;
-    --light-blue: #a6d4fa;
+    --light-blue: #bbdefb;
     --dark-blue: #344861;
     --bright-blue: #325aaf;
     --incorrect-red: #e55c6c;
     --title-black: #0f172a;
     --pencil-blue: #2f4157;
     --label-blue: #717f90;
-    --highlighted-bg: #d6deef;
-    --number-bg: #c2cee7;
+    --highlighted-bg: #e2ebf3;
+    --number-bg: #c3d7ea;
+    --small-border-gray: #bfc6d4;
   }
 
   :global(::selection) {

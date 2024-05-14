@@ -51,9 +51,9 @@
 
 <style>
   .small {
-    border: 0.5px solid var(--dark-blue);
+    border: 0.5px solid var(--small-border-gray);
     aspect-ratio: 1;
-    font-weight: 350;
+    font-weight: 400;
     color: var(--dark-blue);
     user-select: none;
     min-height: 100%;
