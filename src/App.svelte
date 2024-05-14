@@ -1,7 +1,6 @@
 <script lang="ts">
   import clsx from 'clsx'
   import Sudoku from './lib/Sudoku.svelte'
-  import type { Small } from './lib/helpers'
   import {
     inputMode,
     mistakes,
@@ -13,7 +12,8 @@
   } from './lib/store'
   import Footer from './lib/Footer.svelte'
   import { onMount } from 'svelte'
-  import Side from './Side.svelte'
+  import LeftSide from './LeftSide.svelte'
+  import Haiku from './lib/Haiku.svelte'
 
   setInterval(() => {
     $elapsedTime += 1
@@ -29,16 +29,16 @@
 </script>
 
 <section>
-  <Side />
+  <LeftSide />
 
   <main>
     <div class="top">
       <div>
-        <h1>Vim Sudoku</h1>
+        <h1>vim sudoku</h1>
       </div>
       <div class="top-right">
         <p class="mistakes">
-          <span class="label">Mistakes: </span>{$mistakes}/5
+          <span class="label">mistakes: </span>{$mistakes}/5
         </p>
         <p class="time">
           {$displayTime}
@@ -62,6 +62,8 @@
   </main>
 </section>
 
+<Haiku />
+
 <Footer />
 
 <style>
@@ -75,6 +77,7 @@
     background-color: var(--background-blue);
     margin-top: 2em;
     max-height: 100vh;
+    color: var(--dark-blue);
   }
 
   :global(:root) {

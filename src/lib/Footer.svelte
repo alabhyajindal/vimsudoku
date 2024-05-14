@@ -4,18 +4,18 @@
       <li>
         <a
           href="https://superuser.com/questions/246487/how-to-use-vimtutor"
-          target="_blank">Learn Vim</a
+          target="_blank">learn vim</a
         >
       </li>
       <li>
         <a
           href="https://youtu.be/8zRXDsGydeQ?si=BQnRRL4y0SwHzsTe"
-          target="_blank">Learn Sudoku</a
+          target="_blank">learn sudoku</a
         >
       </li>
       <li>
         <a href="https://forms.gle/uvTWNFR6nzc8gC1A7" target="_blank"
-          >Send feedback</a
+          >send feedback</a
         >
       </li>
     </ul>
