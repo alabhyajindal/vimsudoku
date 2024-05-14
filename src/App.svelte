@@ -98,25 +98,25 @@
     color: white;
   }
 
+  :global(aside) {
+    margin-top: 2em;
+    font-weight: 450;
+    min-height: 12em;
+  }
+
   section {
-    margin-inline: 1em;
+    margin-inline: 3em;
     display: flex;
     align-items: start;
   }
 
   main {
     flex: 0 1;
-    min-width: 500px;
+    min-width: 600px;
     max-width: 35%;
     padding-inline: 0.4em;
     margin-inline: auto;
     flex-grow: 1;
-  }
-
-  :global(aside) {
-    margin-top: 2em;
-    font-weight: 500;
-    min-height: 12em;
   }
 
   .top {
@@ -156,8 +156,8 @@
 
   .bottom {
     font-family: monospace;
-    font-weight: 700;
-    font-size: 1.2em;
+    font-weight: 600;
+    font-size: 1.4em;
 
     color: var(--bright-blue);
 

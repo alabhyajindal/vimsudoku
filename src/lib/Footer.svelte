@@ -39,7 +39,7 @@
     position: fixed;
     bottom: 0;
     width: 100%;
-    padding-inline: 1em;
+    padding-inline: 3em;
     padding-block: 0.8em;
     font-weight: 500;
   }

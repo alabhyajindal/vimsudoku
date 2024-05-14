@@ -3,3 +3,9 @@
   <p>each keystroke a careful step,</p>
   <p>one path to the end.</p>
 </aside>
+
+<style>
+  aside {
+    line-height: 1.6;
+  }
+</style>
