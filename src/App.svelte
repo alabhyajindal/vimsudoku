@@ -10,7 +10,6 @@
     displayTime,
     numberIndicators,
   } from './lib/store'
-  import Footer from './lib/Footer.svelte'
   import { onMount } from 'svelte'
   import Instructions from './lib/Instructions.svelte'
   import Haiku from './lib/Haiku.svelte'
@@ -64,7 +63,7 @@
   <Haiku />
 </section>
 
-<Footer />
+<!-- <Footer /> -->
 
 <style>
   :global(*) {
@@ -99,16 +98,22 @@
   }
 
   :global(aside) {
-    margin-top: 2em;
     font-weight: 450;
-    min-height: 12em;
-    font-size: 1.1em;
+    font-size: 1em;
+    align-self: stretch;
+  }
+
+  :global(a) {
+    color: var(--dark-blue);
+  }
+
+  :global(a:hover) {
+    text-decoration: none;
   }
 
   section {
-    margin-inline: 3em;
+    margin-inline: 4em;
     display: flex;
-    align-items: start;
   }
 
   main {
@@ -117,7 +122,6 @@
     max-width: 35%;
     padding-inline: 0.4em;
     margin-inline: auto;
-    flex-grow: 1;
   }
 
   .top {
@@ -156,9 +160,10 @@
   }
 
   .bottom {
+    user-select: none;
     font-family: monospace;
     font-weight: 600;
-    font-size: 1.4em;
+    font-size: 1.3em;
 
     color: var(--bright-blue);
 
