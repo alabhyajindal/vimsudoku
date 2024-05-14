@@ -1,5 +1,6 @@
 import { derived, writable } from 'svelte/store'
 import {
+  checkCompletion,
   createData,
   createNumberIndicators,
   formatTime,
@@ -47,4 +48,8 @@ export const displayTime = derived(elapsedTime, ($elapsedTime) =>
 
 export const numberIndicators = derived(columns, ($columns) =>
   createNumberIndicators($columns)
+)
+
+export const puzzleCompleted = derived(columns, ($columns) =>
+  checkCompletion($columns)
 )

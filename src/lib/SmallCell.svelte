@@ -91,10 +91,6 @@
     align-items: center;
   }
 
-  .hidden {
-    visibility: hidden;
-  }
-
   .incorrect {
     color: var(--incorrect-red);
   }

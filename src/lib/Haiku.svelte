@@ -1,8 +1,24 @@
+<script lang="ts">
+  import clsx from 'clsx'
+  import { puzzleCompleted, displayTime } from './store'
+</script>
+
 <aside>
-  <div class="haiku">
-    <p>blocks of nine await,</p>
-    <p>each keystroke a careful step,</p>
-    <p>one path to the end.</p>
+  <div>
+    {#if $puzzleCompleted}
+      <div class="done">
+        <p class="cong">congratulations!</p>
+        <p>you completed the puzzle in {$displayTime}</p>
+        <p>press <code>y</code> if you want to play again</p>
+        <p></p>
+      </div>
+    {:else}
+      <div class="haiku">
+        <p>blocks of nine await,</p>
+        <p>each keystroke a careful step,</p>
+        <p>one path to the end.</p>
+      </div>
+    {/if}
   </div>
 
   <div>
@@ -17,6 +33,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    min-width: 280px;
   }
 
   .haiku {
@@ -25,5 +42,17 @@
 
   a {
     color: var(--bright-blue);
+  }
+
+  .done {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+    font-weight: 500;
+  }
+
+  .cong {
+    font-weight: 600;
+    font-size: 1.2em;
   }
 </style>

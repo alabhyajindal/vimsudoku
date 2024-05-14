@@ -9,14 +9,17 @@
     elapsedTime,
     displayTime,
     numberIndicators,
+    puzzleCompleted,
   } from './lib/store'
   import { onMount } from 'svelte'
   import Instructions from './lib/Instructions.svelte'
   import Haiku from './lib/Haiku.svelte'
 
-  setInterval(() => {
+  let timer = setInterval(() => {
     $elapsedTime += 1
   }, 1000)
+
+  $: if ($puzzleCompleted) clearInterval(timer)
 
   onMount(() => {
     if (window.innerWidth < 1200) {
@@ -109,6 +112,17 @@
 
   :global(a:hover) {
     text-decoration: none;
+  }
+
+  :global(.hidden) {
+    visibility: hidden;
+  }
+
+  :global(code) {
+    background-color: var(--bright-blue);
+    color: white;
+    padding: 2px 4px;
+    max-width: fit-content;
   }
 
   section {

@@ -87,8 +87,8 @@ export function createData(): {
 function addCellData(grid: number[][]) {
   const result = grid.map((row, rowIndex) => {
     return row.map((answer, columnIndex) => {
-      const prefilled = Math.random() > 0.45
-      // const prefilled = Math.random() > 0.01
+      // const prefilled = Math.random() > 0.45
+      const prefilled = Math.random() > 0.01
       const value = prefilled ? answer : ''
       const pencilMarks = Array.from({ length: 9 }).map((_, i) => ({
         value: i + 1,
@@ -149,4 +149,16 @@ export function createNumberIndicators(columns: Small[][]) {
   })
 
   return result
+}
+
+export function checkCompletion(columns: Small[][]) {
+  let count = 0
+
+  columns.forEach((column) => {
+    column.forEach((cell) => {
+      if (cell.answer == cell.value) count++
+    })
+  })
+  if (count == 81) return true
+  return false
 }

@@ -60,13 +60,6 @@
     gap: 1em;
   }
 
-  code {
-    background-color: var(--dark-blue);
-    color: white;
-    padding: 2px 4px;
-    max-width: fit-content;
-  }
-
   .block {
     display: flex;
     flex-direction: column;

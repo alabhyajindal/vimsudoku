@@ -19,23 +19,23 @@
     columnCell.active = false
     rowCell.active = false
 
-    if (e.key == 'j') {
+    if (e.key == 'j' || e.key == 'ArrowDown') {
       if ($activeRow + 1 <= 8) {
         $activeRow++
       }
-    } else if (e.key == 'k') {
+    } else if (e.key == 'k' || e.key == 'ArrowUp') {
       if ($activeRow - 1 >= 0) {
         $activeRow--
       }
-    } else if (e.key == 'l') {
+    } else if (e.key == 'l' || e.key == 'ArrowRight') {
       if ($activeColumn + 1 <= 8) {
         $activeColumn++
       }
-    } else if (e.key == 'h') {
+    } else if (e.key == 'h' || e.key == 'ArrowLeft') {
       if ($activeColumn - 1 >= 0) {
         $activeColumn--
       }
-    } else if (e.key == 'x') {
+    } else if (e.key == 'x' || e.key == 'Delete') {
       if (!$columns[$activeColumn][$activeRow].prefilled) {
         $columns[$activeColumn][$activeRow].value = ''
 
@@ -95,23 +95,6 @@
     }
   }
 
-  function checkCompletion(columns: Small[][]) {
-    setTimeout(() => {
-      let count = 0
-      columns.forEach((column) => {
-        column.forEach((cell) => {
-          if (cell.answer == cell.value) count++
-        })
-      })
-      if (count == 81) {
-        alert(
-          `Congratulations! You completed the game in ${$displayTime}. Amazing!`
-        )
-      }
-      return false
-    }, 1)
-  }
-
   function checkMistakes(mistakes: number) {
     setTimeout(() => {
       if (mistakes == 3) {
@@ -136,7 +119,6 @@
 
     $activeBigCell = getActiveBigCell($activeColumn, $activeRow)
 
-    checkCompletion($columns)
     checkMistakes($mistakes)
   }
 </script>
