@@ -70,6 +70,24 @@
           $activeRow = 0
         }
       }
+    } else if (e.key == 'w') {
+      const nextEmptyColumn = $rows[$activeRow].findIndex((row) => {
+        const result = row.value == '' && row.columnIndex > $activeColumn
+        return result
+      })
+
+      if (nextEmptyColumn >= 0) {
+        $activeColumn = nextEmptyColumn
+      }
+    } else if (e.key == 'b') {
+      const previousEmptyColumn = $rows[$activeRow].findLastIndex((row) => {
+        const result = row.value == '' && row.columnIndex < $activeColumn
+        return result
+      })
+
+      if (previousEmptyColumn >= 0) {
+        $activeColumn = previousEmptyColumn
+      }
     }
   }
 

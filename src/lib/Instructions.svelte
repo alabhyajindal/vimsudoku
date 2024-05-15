@@ -10,8 +10,7 @@
         <code>H</code> <code>L</code> <code>M</code>
         <br />
         <br />
-        <code>0</code>
-        <code>$</code>
+        <code>w</code> <code>b</code> <code>0</code> <code>$</code>
       </p>
     </div>
     <div class="block">
