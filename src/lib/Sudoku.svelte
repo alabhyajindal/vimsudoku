@@ -13,6 +13,9 @@
     puzzleCompleted,
   } from './store'
 
+  let gCount = 0
+  let gTime = 0
+
   function processCommands(e: KeyboardEvent) {
     let columnCell = $columns[$activeColumn][$activeRow]
     let rowCell = $rows[$activeRow][$activeColumn]
@@ -46,7 +49,7 @@
           selected: false,
         }))
       }
-    } else if (e.key == 'L') {
+    } else if (e.key == 'L' || e.key == 'G') {
       $activeRow = 8
     } else if (e.key == 'H') {
       $activeRow = 0
@@ -56,6 +59,17 @@
       $activeColumn = 0
     } else if (e.key == '$') {
       $activeColumn = 8
+    } else if (e.key == 'g') {
+      gCount++
+      if (gCount < 2) {
+        gTime = new Date().getTime()
+      } else if (gCount == 2) {
+        gCount = 0
+        const currentTime = new Date().getTime()
+        if (currentTime - gTime < 700) {
+          $activeRow = 0
+        }
+      }
     }
   }
 

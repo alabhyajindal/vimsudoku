@@ -4,7 +4,13 @@
       <p>navigate</p>
       <p>
         <code>j</code> <code>h</code> <code>k</code> <code>l</code>
-        <code>H</code> <code>L</code> <code>M</code> <code>0</code>
+        <br />
+        <br />
+        <code>gg</code> <code>G</code>
+        <code>H</code> <code>L</code> <code>M</code>
+        <br />
+        <br />
+        <code>0</code>
         <code>$</code>
       </p>
     </div>
