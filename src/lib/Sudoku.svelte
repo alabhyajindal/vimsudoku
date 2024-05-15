@@ -92,14 +92,26 @@
 
       findNext(false)
     } else if (e.key == 'b') {
-      const previousEmptyColumn = $rows[$activeRow].findLastIndex((row) => {
-        const result = row.value == '' && row.columnIndex < $activeColumn
-        return result
-      })
+      function findPrevious(comingFromNext: boolean) {
+        const previousEmptyColumn = $rows[$activeRow].findLastIndex((row) => {
+          const result =
+            row.value == '' &&
+            (row.columnIndex < $activeColumn || comingFromNext)
+          return result
+        })
 
-      if (previousEmptyColumn >= 0) {
-        $activeColumn = previousEmptyColumn
+        if (previousEmptyColumn >= 0) {
+          $activeColumn = previousEmptyColumn
+        } else {
+          if ($activeRow - 1 >= 0) {
+            $activeRow--
+            $activeColumn = 0
+            findPrevious(true)
+          }
+        }
       }
+
+      findPrevious(false)
     }
   }
 
