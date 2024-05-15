@@ -128,6 +128,7 @@
     }
 
     if (e.key == 'Escape' || (e.ctrlKey && e.key == '[')) {
+      e.preventDefault()
       if ($inputMode == 'pencil') $inputMode = 'solve'
       else if ($inputMode == 'solve') $inputMode = 'pencil'
       else if ($inputMode == 'cmd') $inputMode = 'pencil'
