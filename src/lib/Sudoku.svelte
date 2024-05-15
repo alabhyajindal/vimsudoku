@@ -14,13 +14,17 @@
   } from './store'
 
   let gCount = 0
-  let gTime = 0
 
   function processCommands(e: KeyboardEvent) {
     let columnCell = $columns[$activeColumn][$activeRow]
     let rowCell = $rows[$activeRow][$activeColumn]
     columnCell.active = false
     rowCell.active = false
+
+    // Reset gCount if non-g key is pressed
+    if (e.key !== 'g') {
+      gCount = 0
+    }
 
     if (e.key == 'j' || e.key == 'ArrowDown') {
       if ($activeRow + 1 <= 8) {
@@ -60,15 +64,12 @@
     } else if (e.key == '$') {
       $activeColumn = 8
     } else if (e.key == 'g') {
+      // Increment gCount
       gCount++
-      if (gCount < 2) {
-        gTime = new Date().getTime()
-      } else if (gCount == 2) {
+      // If the gCount is 2, then reset gCount and perform relevant action
+      if (gCount == 2) {
         gCount = 0
-        const currentTime = new Date().getTime()
-        if (currentTime - gTime < 700) {
-          $activeRow = 0
-        }
+        $activeRow = 0
       }
     } else if (e.key == 'w') {
       function findNext(comingFromPrevious: boolean) {
