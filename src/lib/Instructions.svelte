@@ -14,7 +14,7 @@
       </p>
     </div>
     <div class="block">
-      <p>switch mode</p>
+      <p>switch modes</p>
       <p>
         <code>&lt;Esc&gt;</code>
         <code>&lt;C-&lsqb;&gt;</code>
