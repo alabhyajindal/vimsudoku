@@ -74,7 +74,7 @@
       function findNext(comingFromPrevious: boolean) {
         const nextEmptyColumn = $rows[$activeRow].findIndex((row) => {
           const result =
-            row.value == '' &&
+            (row.value == '' || row.value !== row.answer) &&
             (row.columnIndex > $activeColumn || comingFromPrevious)
           return result
         })
@@ -95,7 +95,7 @@
       function findPrevious(comingFromNext: boolean) {
         const previousEmptyColumn = $rows[$activeRow].findLastIndex((row) => {
           const result =
-            row.value == '' &&
+            (row.value == '' || row.value !== row.answer) &&
             (row.columnIndex < $activeColumn || comingFromNext)
           return result
         })
