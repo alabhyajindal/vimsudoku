@@ -71,14 +71,28 @@
         }
       }
     } else if (e.key == 'w') {
-      const nextEmptyColumn = $rows[$activeRow].findIndex((row) => {
-        const result = row.value == '' && row.columnIndex > $activeColumn
-        return result
-      })
+      function findNext() {
+        console.log('findNext ran')
 
-      if (nextEmptyColumn >= 0) {
-        $activeColumn = nextEmptyColumn
+        const nextEmptyColumn = $rows[$activeRow].findIndex((row) => {
+          const result = row.value == '' && row.columnIndex > $activeColumn
+          return result
+        })
+
+        console.log({ $activeRow, nextEmptyColumn })
+
+        if (nextEmptyColumn >= 0) {
+          $activeColumn = nextEmptyColumn
+        } else {
+          if ($activeRow + 1 <= 8) {
+            $activeRow++
+            $activeColumn = 0
+            findNext()
+          }
+        }
       }
+
+      findNext()
     } else if (e.key == 'b') {
       const previousEmptyColumn = $rows[$activeRow].findLastIndex((row) => {
         const result = row.value == '' && row.columnIndex < $activeColumn
