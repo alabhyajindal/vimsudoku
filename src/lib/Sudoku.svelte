@@ -71,15 +71,13 @@
         }
       }
     } else if (e.key == 'w') {
-      function findNext() {
-        console.log('findNext ran')
-
+      function findNext(comingFromPrevious: boolean) {
         const nextEmptyColumn = $rows[$activeRow].findIndex((row) => {
-          const result = row.value == '' && row.columnIndex > $activeColumn
+          const result =
+            row.value == '' &&
+            (row.columnIndex > $activeColumn || comingFromPrevious)
           return result
         })
-
-        console.log({ $activeRow, nextEmptyColumn })
 
         if (nextEmptyColumn >= 0) {
           $activeColumn = nextEmptyColumn
@@ -87,12 +85,12 @@
           if ($activeRow + 1 <= 8) {
             $activeRow++
             $activeColumn = 0
-            findNext()
+            findNext(true)
           }
         }
       }
 
-      findNext()
+      findNext(false)
     } else if (e.key == 'b') {
       const previousEmptyColumn = $rows[$activeRow].findLastIndex((row) => {
         const result = row.value == '' && row.columnIndex < $activeColumn
